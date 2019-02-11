@@ -12,5 +12,9 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of StatTracker, @stat_tracker
   end
 
+  def test_stat_tracker_has_from_csv_method
+    assert_instance_of StatTracker, StatTracker.from_csv
+  end
+
 
 end
