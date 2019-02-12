@@ -33,7 +33,6 @@ class LeagueMethodsTest < Minitest::Test
   end
 
   def test_getting_best_season_for_a_team
-    skip
     assert_equal 20152016, @stat_tracker.best_season(2)
   end
 end
