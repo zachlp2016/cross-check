@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/stat_tracker'
 require './lib/team'
+require './lib/game_team'
 require 'pry'
 
 class StatTrackerTest < Minitest::Test
@@ -43,5 +44,9 @@ class StatTrackerTest < Minitest::Test
 
   def test_stat_tracker_teams_ivar_contains_teams
     assert_instance_of Team, @stat_tracker.teams.sample
+  end
+
+  def test_stat_tracker_games_teams_ivar_contains_teams
+    assert_instance_of GameTeam, @stat_tracker.game_teams.sample
   end
 end
