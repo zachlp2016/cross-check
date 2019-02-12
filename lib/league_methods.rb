@@ -57,7 +57,7 @@ module LeagueMethods
     games.min_by{|game| game.goals}.goals
   end
 
-  def favorite_opponent(team_id)
+  def get_outcomes_by_opponent(team_id)
     games = get_games_by_team(team_id)
     outcomes_against = Hash.new{|hash,opponent|
       hash[opponent] = {win: 0, loss: 0}
@@ -70,7 +70,20 @@ module LeagueMethods
       outcome = target_game.won ? :win : :loss
       outcomes_against[opponent][outcome] += 1
     end
+    return outcomes_against
+  end
+
+  def favorite_opponent(team_id)
+    outcomes_against = get_outcomes_by_opponent(team_id)
     favorite_id = outcomes_against.max_by do |opponent,stats|
+      stats[:win].to_f / stats[:loss]
+    end[0]
+    get_team(favorite_id).team_name
+  end
+
+  def rival(team_id)
+    outcomes_against = get_outcomes_by_opponent(team_id)
+    favorite_id = outcomes_against.min_by do |opponent,stats|
       stats[:win].to_f / stats[:loss]
     end[0]
     get_team(favorite_id).team_name
