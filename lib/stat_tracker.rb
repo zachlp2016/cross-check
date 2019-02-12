@@ -13,7 +13,7 @@ class StatTracker
       end
       @teams = []
       data[:teams].each do |team|
-        @teams << team
+        @teams << Team.new(team.to_hash)
       end
       @game_teams = []
       data[:game_teams].each do |game_team|
