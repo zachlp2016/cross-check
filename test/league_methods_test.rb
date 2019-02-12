@@ -47,6 +47,10 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_most_goals_scored
     assert_equal 6, @stat_tracker.most_goals_scored(2)
   end
+
+  def test_getting_fewest_goals_scored
+    assert_equal 0, @stat_tracker.fewest_goals_scored(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
