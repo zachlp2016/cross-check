@@ -69,7 +69,7 @@ class LeagueMethodsTest < Minitest::Test
   end
 
   def test_getting_head_to_head_comparison
-    expectation = {wins: 3, loss: 4}
+    expectation = {win: 3, loss: 4}
     assert_equal expectation, @stat_tracker.head_to_head(2, 15)
   end
 end
