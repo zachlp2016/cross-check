@@ -13,4 +13,13 @@ class Team
     @abbreviation = team_details["abbreviation"]
     @link = team_details["link"]
   end
+
+  def info
+    {team_id: @team_id,
+    franchise_id: @franchise_id,
+    short_name: @short_name,
+    team_name: @team_name,
+    abbreviation: @abbreviation,
+    link: @link}
+  end
 end
