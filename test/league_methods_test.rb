@@ -55,6 +55,10 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_favorite_opponent
     assert_equal "Panthers", @stat_tracker.favorite_opponent(2)
   end
+
+  def test_getting_rival
+    assert_equal "Lightning", @stat_tracker.rival(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
