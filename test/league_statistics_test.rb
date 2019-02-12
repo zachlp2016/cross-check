@@ -4,19 +4,13 @@ require './lib/team'
 require './lib/game_team'
 require './lib/game'
 require './lib/stat_tracker'
-require './lib/team_methods'
+require './lib/league_statistics'
 
 require 'pry'
 
-class TeamMethodsTest < Minitest::Test
+class LeagueStatisticsTest < Minitest::Test
 
   def setup
-    @game_team_1
-    @game_team_2
-    @game_team_3
-    @game_team_4
-    @game_team_5
-    @game_team_6
 
       @game_path = './data/game_test.csv'
       @team_path = './data/team_info.csv'
@@ -27,7 +21,6 @@ class TeamMethodsTest < Minitest::Test
         game_teams: @game_teams_path
       }
       @stat_tracker = StatTracker.from_csv(@locations)
-
   end
 
   def test_method_count_of_teams
