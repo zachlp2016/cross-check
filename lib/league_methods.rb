@@ -42,4 +42,9 @@ module LeagueMethods
     wins = games.count{|game| game.won == true}
     (wins.to_f / games.count).round(4) * 100
   end
+
+  def most_goals_scored(team_id)
+    games = get_games_by_team(team_id)
+    games.max_by{|game| game.goals}.goals
+  end
 end
