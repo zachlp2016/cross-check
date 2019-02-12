@@ -25,7 +25,7 @@ module TeamMethods
 
   def best_offense
     teams.each do |team|
-      if team_id_return_best_offense == team.team_id
+      if team_id_best_offense == team.team_id
         return team.short_name
       end
     end
