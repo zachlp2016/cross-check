@@ -72,6 +72,35 @@ class LeagueMethodsTest < Minitest::Test
     expectation = {win: 3, loss: 4}
     assert_equal expectation, @stat_tracker.head_to_head(2, 15)
   end
+
+  def test_getting_seasonal_summary
+    game_path = './data/game_team_2.csv'
+    team_path = './data/team_info.csv'
+    game_teams_path = './data/game_teams_stats_team_2.csv'
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+    expectation = {
+      regular_season: {
+        win_percentage: 0.21,
+        total_goals_scored: 1353,
+        total_goals_against: 1390,
+        average_goals_scored: 2.95,
+        average_goals_against: 3.03
+      },
+      playoffs: {
+        win_percentage: 0.24,
+        total_goals_scored: 58,
+        total_goals_against: 73,
+        average_goals_scored: 2.42,
+        average_goals_against: 3.04
+      }
+    }
+    assert_equal expectation, stat_tracker.seasonal_summary(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
