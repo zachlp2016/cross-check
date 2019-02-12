@@ -5,10 +5,12 @@ module LeagueMethods
     end.info
   end
 
+  def get_games_by_team(team_id)
+    @game_teams.select {|game| game.team_id == team_id}
+  end
+
   def team_win_loss_by_season(team_id)
-    game_results = @game_teams.select do |game|
-      game.team_id == team_id
-    end
+    game_results = get_games_by_team(team_id)
     season_results = Hash.new{|hash,key|
       hash[key] = {win: 0, loss: 0}
     }
@@ -33,5 +35,11 @@ module LeagueMethods
     season_results.min_by do |season,results|
       results[:win].to_f / (results[:win] + results[:loss])
     end[0].to_i
+  end
+
+  def average_win_percentage(team_id)
+    games = get_games_by_team(team_id)
+    wins = games.count{|game| game.won == true}
+    (wins.to_f / games.count).round(4) * 100
   end
 end
