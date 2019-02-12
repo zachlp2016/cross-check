@@ -7,9 +7,9 @@ require 'pry'
 class TeamTest < Minitest::Test
   def setup
     @files = {
-      game: './data/game_test.csv',
-      team: './data/team_info.csv',
-      game_team: './data/game_teams_stats_test.csv'
+      games: './data/game_test.csv',
+      teams: './data/team_info.csv',
+      game_teams: './data/game_teams_stats_test.csv'
     }
     @stat_tracker = StatTracker.from_csv(@files)
   end
