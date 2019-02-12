@@ -25,4 +25,8 @@ class GameMethodsTest < Minitest::Test
     assert_equal 13, @stat_tracker.highest_total_score
   end
 
+  def test_lowest_total_score
+    assert_equal 1, @stat_tracker.lowest_total_score
+  end
+
 end
