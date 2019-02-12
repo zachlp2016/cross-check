@@ -7,18 +7,9 @@ class StatTracker
 
   def initialize(data = nil)
     if data
-      @games = []
-      data[:games].each do |game|
-        @games << game
-      end
-      @teams = []
-      data[:teams].each do |team|
-        @teams << team
-      end
-      @game_teams = []
-      data[:game_teams].each do |game_team|
-        @game_teams << game_team
-      end
+      @games = data[:games].map {|game| @games << game}
+      @teams = data[:teams].map{|team| Team.new(team.to_hash)}
+      @game_teams = data[:game_teams].map {|game_team| @game_teams << game_team}
     end
   end
 
