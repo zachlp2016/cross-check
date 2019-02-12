@@ -35,6 +35,10 @@ class TeamMethodsTest < Minitest::Test
   end
 
   def test_method_best_offense_works
-    assert_equal "NY Rangers", @stat_tracker.best_offense
+    assert_equal "Pittsburgh", @stat_tracker.best_offense
+  end
+
+  def test_method_best_defense_works
+    assert_equal "Philadelphia", @stat_tracker.worst_offense
   end
 end
