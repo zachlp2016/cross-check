@@ -14,12 +14,12 @@ class TeamTest < Minitest::Test
     # @stat_tracker = StatTracker.from_csv(@files)
 
     @team = Team.new({
-      team_id: 1,
-      franchiseId: 23,
-      shortName: "New Jersey",
-      teamName: "Devils",
-      abbreviation: "NJD",
-      link: "/api/v1/teams/1"})
+      "team_id" => 1,
+      "franchiseId" => 23,
+      "shortName" => "New Jersey",
+      "teamName" => "Devils",
+      "abbreviation" => "NJD",
+      "link" => "/api/v1/teams/1"})
   end
 
   def test_team_exists
