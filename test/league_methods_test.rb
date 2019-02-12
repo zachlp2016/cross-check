@@ -67,6 +67,11 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_worst_loss
     assert_equal 5, @stat_tracker.worst_loss(2)
   end
+
+  def test_getting_head_to_head_comparison
+    expectation = {wins: 3, loss: 4}
+    assert_equal expectation, @stat_tracker.head_to_head(2, 15)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
