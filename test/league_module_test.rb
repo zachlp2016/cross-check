@@ -39,6 +39,10 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_worst_season_for_a_team
     assert_equal 20122013, @stat_tracker.worst_season(2)
   end
+
+  def test_getting_average_win_percentage
+    assert_equal 41.67, @stat_tracker.average_win_percentage(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
