@@ -59,6 +59,10 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_rival
     assert_equal "Lightning", @stat_tracker.rival(2)
   end
+
+  def test_getting_biggest_blowout
+    assert_equal 3, @stat_tracker.biggest_team_blowout(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
