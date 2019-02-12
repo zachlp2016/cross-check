@@ -2,6 +2,8 @@ require 'csv'
 
 class StatTracker
 
+  attr_reader :data
+
   def initialize(data)
     @data = data
   end
