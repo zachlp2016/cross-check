@@ -1,12 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/stat_tracker'
+require './lib/team'
 require 'pry'
 
 class StatTrackerTest < Minitest::Test
 
   def setup
-    @stat_tracker = StatTracker.new(nil)
+    @empty_stat_tracker = StatTracker.new
     @team_info_arr = [
                     ["team_id","franchiseId","shortName","teamName","abbreviation","link"],
                     ["1","23","New Jersey","Devils","NJD","/api/v1/teams/1"],
@@ -18,19 +19,25 @@ class StatTrackerTest < Minitest::Test
     @game_path = './data/game.csv'
     @team_path = './data/team_info.csv'
     @game_teams_path = './data/game_teams_stats.csv'
-
     @locations = {
       games: @game_path,
       teams: @team_path,
       game_teams: @game_teams_path
-  }
+    }
+    @stat_tracker = StatTracker.from_csv(@locations)
   end
 
   def test_stat_tracker_exists
-    assert_instance_of StatTracker, @stat_tracker
+    assert_instance_of StatTracker, @empty_stat_tracker
   end
 
   def test_stat_tracker_has_from_csv_method
-    assert_instance_of StatTracker, StatTracker.from_csv(@locations)
+    assert_instance_of StatTracker, @stat_tracker
+  end
+
+  def test_stat_tracker_initializes_attributes
+    assert_instance_of Array, @stat_tracker.games
+    assert_instance_of Array, @stat_tracker.teams
+    assert_instance_of Array, @stat_tracker.game_teams
   end
 end
