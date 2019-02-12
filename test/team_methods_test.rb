@@ -11,32 +11,12 @@ require 'pry'
 class TeamMethodsTest < Minitest::Test
 
   def setup
-    @team = Team.new({
-      "team_id" => 1,
-      "franchiseId" => 23,
-      "shortName" => "New Jersey",
-      "teamName" => "Devils",
-      "abbreviation" => "NJD",
-      "link" => "/api/v1/teams/1"
-      })
-
-    @team_2 = Team.new({
-      "team_id" => 4,
-      "franchiseId" => 16,
-      "shortName" => "Philadelphia",
-      "teamName" => "Flyers",
-      "abbreviation" => "PHI",
-      "link" => "/api/v1/teams/4"
-      })
-
-    @team_3 = Team.new({
-      "team_id" => 26,
-      "franchiseId" => 14,
-      "shortName" => "Los Angeles",
-      "teamName" => "Kings",
-      "abbreviation" => "LAK",
-      "link" => "/api/v1/teams/26"
-      })
+    @game_team_1
+    @game_team_2
+    @game_team_3
+    @game_team_4
+    @game_team_5
+    @game_team_6
 
       @game_path = './data/game_test.csv'
       @team_path = './data/team_info.csv'
@@ -52,5 +32,9 @@ class TeamMethodsTest < Minitest::Test
 
   def test_method_count_of_teams
     assert_equal 33, @stat_tracker.count_of_teams
+  end
+
+  def test_method_best_offense_works
+    assert_equal "NY Rangers", @stat_tracker.best_offense
   end
 end
