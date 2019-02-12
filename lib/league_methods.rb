@@ -88,4 +88,15 @@ module LeagueMethods
     end[0]
     get_team(favorite_id).team_name
   end
+
+  def biggest_team_blowout(team_id)
+    wins = @games.select do |game|
+      (game.away_team_id == team_id &&
+       game.away_goals > game.home_goals) ||
+      (game.home_team_id == team_id &&
+       game.home_goals > game.away_goals)
+    end
+    max = wins.max_by{|game| (game.away_goals - game.home_goals).abs}
+    (max.away_goals - max.home_goals).abs
+  end
 end
