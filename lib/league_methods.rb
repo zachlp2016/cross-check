@@ -99,4 +99,15 @@ module LeagueMethods
     max = wins.max_by{|game| (game.away_goals - game.home_goals).abs}
     (max.away_goals - max.home_goals).abs
   end
+
+  def worst_loss(team_id)
+    losses = @games.select do |game|
+      (game.away_team_id == team_id &&
+       game.away_goals < game.home_goals) ||
+      (game.home_team_id == team_id &&
+       game.home_goals < game.away_goals)
+    end
+    max = losses.max_by{|game| (game.away_goals - game.home_goals).abs}
+    (max.away_goals - max.home_goals).abs
+  end
 end
