@@ -14,5 +14,3 @@ locations = {
 }
 
 stat_tracker = StatTracker.from_csv('./data')
-
-binding.pry
