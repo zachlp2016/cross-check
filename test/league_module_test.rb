@@ -35,6 +35,10 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_best_season_for_a_team
     assert_equal 20152016, @stat_tracker.best_season(2)
   end
+
+  def test_getting_worst_season_for_a_team
+    assert_equal 20122013, @stat_tracker.worst_season(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
