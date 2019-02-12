@@ -5,7 +5,7 @@ module LeagueMethods
     end.info
   end
 
-  def best_season(team_id)
+  def team_win_loss_by_season(team_id)
     game_results = @game_teams.select do |game|
       game.team_id == team_id
     end
@@ -18,7 +18,19 @@ module LeagueMethods
       result = game.won ? :win : :loss
       season_results[season][result] += 1
     end
+    return season_results
+  end
+
+  def best_season(team_id)
+    season_results = team_win_loss_by_season(team_id)
     season_results.max_by do |season,results|
+      results[:win].to_f / (results[:win] + results[:loss])
+    end[0].to_i
+  end
+
+  def worst_season(team_id)
+    season_results = team_win_loss_by_season(team_id)
+    season_results.min_by do |season,results|
       results[:win].to_f / (results[:win] + results[:loss])
     end[0].to_i
   end
