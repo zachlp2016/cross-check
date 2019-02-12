@@ -110,4 +110,8 @@ module LeagueMethods
     max = losses.max_by{|game| (game.away_goals - game.home_goals).abs}
     (max.away_goals - max.home_goals).abs
   end
+
+  def head_to_head(team_id, opponent_id)
+    get_outcomes_by_opponent(team_id)[opponent_id]
+  end
 end
