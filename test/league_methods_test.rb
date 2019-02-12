@@ -43,6 +43,10 @@ class LeagueMethodsTest < Minitest::Test
   def test_getting_average_win_percentage
     assert_equal 41.67, @stat_tracker.average_win_percentage(2)
   end
+
+  def test_getting_most_goals_scored
+    assert_equal 6, @stat_tracker.most_goals_scored(2)
+  end
 end
 
 # team_info                 A hash with key/value pairs for each of the attributes of a team.
