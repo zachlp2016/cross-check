@@ -53,7 +53,7 @@ class LeagueMethodsTest < Minitest::Test
   end
 
   def test_getting_favorite_opponent
-    assert_equal "Florida Panthers", @stat_tracker.favorite_opponent(2)
+    assert_equal "Panthers", @stat_tracker.favorite_opponent(2)
   end
 end
 
