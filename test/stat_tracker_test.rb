@@ -40,4 +40,8 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of Array, @stat_tracker.teams
     assert_instance_of Array, @stat_tracker.game_teams
   end
+
+  def test_stat_tracker_teams_ivar_contains_teams
+    assert_instance_of Team, @stat_tracker.teams.sample
+  end
 end
