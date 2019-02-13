@@ -85,14 +85,14 @@ class LeagueMethodsTest < Minitest::Test
     stat_tracker = StatTracker.from_csv(locations)
     expectation = {
       regular_season: {
-        win_percentage: 0.21,
+        win_percentage: 0.49,
         total_goals_scored: 1353,
         total_goals_against: 1390,
         average_goals_scored: 2.95,
         average_goals_against: 3.03
       },
       playoffs: {
-        win_percentage: 0.24,
+        win_percentage: 0.42,
         total_goals_scored: 58,
         total_goals_against: 73,
         average_goals_scored: 2.42,

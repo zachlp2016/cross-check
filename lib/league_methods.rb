@@ -114,4 +114,36 @@ module LeagueMethods
   def head_to_head(team_id, opponent_id)
     get_outcomes_by_opponent(team_id)[opponent_id]
   end
+
+  def seasonal_summary(team_id)
+    summary = Hash.new{|summary,season|
+      summary[season] = Hash.new{|details,stat|
+        details[stat] = 0
+      }
+    }
+    @games.each do |game|
+      type = game.type == "P" ? :playoffs : :regular_season
+      summary[type][:count] += 1
+      if game.away_team_id == team_id
+        summary[type][:total_goals_scored] += game.away_goals
+        summary[type][:total_goals_against] += game.home_goals
+        summary[type][:win] += 1 if game.away_goals > game.home_goals
+      elsif game.home_team_id == team_id
+        summary[type][:total_goals_scored] += game.home_goals
+        summary[type][:total_goals_against] += game.away_goals
+        summary[type][:win] += 1 if game.away_goals < game.home_goals
+      end
+    end
+    summary[:playoffs][:win_percentage] = (summary[:playoffs][:win].to_f / summary[:playoffs][:count]).round(2)
+    summary[:regular_season][:win_percentage] = (summary[:regular_season][:win].to_f / summary[:regular_season][:count]).round(2)
+    summary[:playoffs][:average_goals_scored] = (summary[:playoffs][:total_goals_scored].to_f / summary[:playoffs][:count]).round(2)
+    summary[:regular_season][:average_goals_scored] = (summary[:regular_season][:total_goals_scored].to_f / summary[:regular_season][:count]).round(2)
+    summary[:playoffs][:average_goals_against] = (summary[:playoffs][:total_goals_against].to_f / summary[:playoffs][:count]).round(2)
+    summary[:regular_season][:average_goals_against] = (summary[:regular_season][:total_goals_against].to_f / summary[:regular_season][:count]).round(2)
+    summary[:playoffs].delete(:count)
+    summary[:playoffs].delete(:win)
+    summary[:regular_season].delete(:count)
+    summary[:regular_season].delete(:win)
+    return summary
+  end
 end
