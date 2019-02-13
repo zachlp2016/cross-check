@@ -1,11 +1,11 @@
 require 'csv'
 require './lib/true_false_converter'
-require './lib/team_methods'
+require './lib/league_statistics'
 
 
 class StatTracker
   include TrueFalseConverter
-  include TeamMethods
+  include LeagueStatistics
   attr_reader :games,
               :teams,
               :game_teams

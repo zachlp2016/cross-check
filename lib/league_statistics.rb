@@ -1,11 +1,8 @@
-module TeamMethods
+module LeagueStatistics
 
   def count_of_teams
     teams.count
   end
-
-  # Get highest Average goals scored per game for a team,
-  # then produce the team with the highest average.
 
   def group_by_team
     teams = @game_teams.group_by do |game_team|
