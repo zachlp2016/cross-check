@@ -22,4 +22,26 @@ module GameMethods
    difference_in_score.away_goals - difference_in_score.home_goals
  end
 
+ def percentage_home_wins
+
+ end
+
+ def total_home_games_won
+   home_wins = @game_teams.map do |team|
+    if team.home_or_away == "home" && team.won == true
+      team.team_id
+      end
+    end
+    home_wins.compact.count
+  end
+
+  def total_away_games_won
+   away_wins = @game_teams.map do |team|
+    if team.home_or_away == "away" && team.won == true
+      team.team_id
+      end
+    end
+    away_wins.compact.count
+  end
+
 end
