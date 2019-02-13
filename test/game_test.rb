@@ -7,16 +7,6 @@ require 'pry'
 class GameTest < Minitest::Test
 
   def setup
-    # @files = {
-    #   games: './data/game.csv',
-    #   teams: './data/team_info.csv',
-    #   game_teams: './data/game_teams_stats.csv'
-    # }
-    #
-    # @stat_tracker = StatTracker.new
-    # @files_from_csv = StatTracker.from_csv(@files)
-    # @games = Game.new(@stat_tracker.games)
-
     @game_data = {
           "game_id" => "2012030221",
           "season" => "20122013",
@@ -37,7 +27,7 @@ class GameTest < Minitest::Test
 
     @game = Game.new(@game_data)
   end
-
+  
   def test_game_class_exists
     assert_instance_of Game, @game
   end
@@ -58,7 +48,5 @@ class GameTest < Minitest::Test
     assert_equal "America/New_York", @game.venue_time_zone_id
     assert_equal -4, @game.venue_time_zone_offset
     assert_equal "EDT", @game.venue_time_zone_tz
-
   end
-
 end

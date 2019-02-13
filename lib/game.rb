@@ -34,7 +34,4 @@ class Game
     @venue_time_zone_offset = data["venue_time_zone_offset"]
     @venue_time_zone_tz = data["venue_time_zone_tz"]
   end
-
-
-
 end
