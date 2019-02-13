@@ -1,6 +1,6 @@
 require 'csv'
 require './lib/true_false_converter'
-require './lib/league_methods'
+require './lib/team_statistics'
 
 class StatTracker
   include TrueFalseConverter
