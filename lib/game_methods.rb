@@ -54,4 +54,11 @@ module GameMethods
     total_home_games_won + total_away_games_won.to_f
   end
 
+  def total_count_of_games_by_season(season)
+    seasons = @games.group_by do |season|
+      season.season
+    end
+      seasons.fetch_values(season)[0].count
+  end
+
 end

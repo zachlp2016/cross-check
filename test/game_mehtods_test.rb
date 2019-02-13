@@ -45,6 +45,16 @@ class GameMethodsTest < Minitest::Test
   def test_percentage_home_and_away_wins
     assert_equal 0.56, @stat_tracker.percentage_home_wins
     assert_equal 0.44, @stat_tracker.percentage_away_wins
-
   end
+
+  def test_count_of_games_by_season
+    assert_equal 86, @stat_tracker.total_count_of_games_by_season(20122013)
+    assert_equal 93, @stat_tracker.total_count_of_games_by_season(20132014)
+    assert_equal 89, @stat_tracker.total_count_of_games_by_season(20142015)
+    assert_equal 91, @stat_tracker.total_count_of_games_by_season(20152016)
+    assert_equal 87, @stat_tracker.total_count_of_games_by_season(20162017)
+    assert_equal 84, @stat_tracker.total_count_of_games_by_season(20172018)
+  end
+
+
 end
