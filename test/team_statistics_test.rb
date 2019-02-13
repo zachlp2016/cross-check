@@ -3,10 +3,10 @@ require 'minitest/pride'
 require './lib/stat_tracker'
 require './lib/team'
 require './lib/game_team'
-require './lib/league_methods'
+require './lib/team_statistics'
 require 'pry'
 
-class LeagueMethodsTest < Minitest::Test
+class TeamStatisticsTest < Minitest::Test
 
   def setup
     @game_path = './data/game_test.csv'

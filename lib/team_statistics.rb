@@ -1,4 +1,4 @@
-module LeagueMethods
+module TeamStatistics
   def get_team(team_id)
     @teams.find do |team|
       team.team_id == team_id

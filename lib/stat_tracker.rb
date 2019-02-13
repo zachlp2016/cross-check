@@ -4,7 +4,7 @@ require './lib/league_methods'
 
 class StatTracker
   include TrueFalseConverter
-  include LeagueMethods
+  include TeamStatistics
   attr_reader :games,
               :teams,
               :game_teams
