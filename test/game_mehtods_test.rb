@@ -56,5 +56,9 @@ class GameMethodsTest < Minitest::Test
     assert_equal 84, @stat_tracker.total_count_of_games_by_season(20172018)
   end
 
+  def test_average_goals_per_game 
+
+  end
+
 
 end

@@ -61,4 +61,8 @@ module GameMethods
       seasons.fetch_values(season)[0].count
   end
 
+  def average_goals_per_game
+
+  end
+
 end
