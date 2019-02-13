@@ -30,15 +30,21 @@ class GameMethodsTest < Minitest::Test
   end
 
   def test_biggest_blowout
-  assert_equal 5, @stat_tracker.biggest_blowout
-end
-
-  def test_home_games_won
-    assert_equal 299 , @stat_tracker.total_home_games_won
+    assert_equal 5, @stat_tracker.biggest_blowout
   end
 
-  def test_away_games_won
+  def test_home_and_away_games_won
+    assert_equal 299 , @stat_tracker.total_home_games_won
     assert_equal  231, @stat_tracker.total_away_games_won
   end
 
+  def test_total_games_played
+    assert_equal 530, @stat_tracker.total_games
+  end
+
+  def test_percentage_home_and_away_wins
+    assert_equal 0.56, @stat_tracker.percentage_home_wins
+    assert_equal 0.44, @stat_tracker.percentage_away_wins
+
+  end
 end
