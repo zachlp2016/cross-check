@@ -3,9 +3,11 @@ require './lib/true_false_converter'
 require './lib/team_statistics'
 require './lib/league_statistics'
 require './lib/game_methods'
+require './lib/helper_methods'
 
 class StatTracker
   include TrueFalseConverter
+  include HelperMethods
   include TeamStatistics
   include LeagueStatistics
   include GameMethods
