@@ -45,14 +45,47 @@ module LeagueStatistics
   end
 
   def best_defense
-    goals_allowed_by_team = {}
-    group_by_game.each do |game|
-      if game[1][0].home_or_away == "home"
-        goals_allowed_by_team[game[1][0].team_id] = game[1][1].goals
-      elsif game[1][1].home_or_away == "away"
-        goals_allowed_by_team[game[1][1].team_id] = game[1][0].goals
+    goals_allowed = {}
+    @game_teams.each do |game|
+      group_by_game.each_value do |game_value|
+        if game.game_id == game_value[0].game_id
+          binding.pry
+          if goals_allowed[game_value[0].team_id] == nil
+            goals_allowed[game_value[0].team_id] = game_value[1].goals
+          elsif goals_allowed[game_value[0].team_id] != nil
+            goals_allowed[game_value[0].team_id] += game_value[1].goals
+          if goals_allowed[game_value[1].team_id] == nil
+            goals_allowed[game_value[1].team_id] = game_value[0].goals
+          elsif goals_allowed[game_value[1].team_id] != nil
+            goals_allowed[game_value[1].team_id] += game_value[0].goals
+          end
+          end
+        end
       end
     end
     binding.pry
   end
 end
+
+# def best_defense
+#   goals_allowed = {}
+#   group_by_game.each do |game_hash|
+#     if game_hash[1][0].home_or_away == "home" || game_hash[1][0].home_or_away == "away"
+#       if goals_allowed[game_hash[1][0].team_id] == nil
+#         goals_allowed[game_hash[1][0].team_id] = game_hash[1][1].goals
+#       elsif goals_allowed[game_hash[1][0].team_id] != nil
+#         goals_allowed[game_hash[1][0].team_id] += game_hash[1][1].goals
+#       end
+#     elsif game_hash[1][1].home_or_away == "away" || game_hash[1][1].home_or_away == "home"
+#       if goals_allowed[game_hash[1][1].team_id] == nil
+#         goals_allowed[game_hash[1][1].team_id] = game_hash[1][0].goals
+#       elsif goals_allowed[game_hash[1][1].team_id] != nil
+#         goals_allowed[game_hash[1][1].team_id] += game_hash[1][0].goals
+#       end
+#     end
+#   end
+#   binding.pry
+# end
+#
+# "2012030221","3","away",FALSE,"OT","John Tortorella",2,35,44,8,3,0,44.8,17,7
+# "2012030221","6","home",TRUE,"OT","Claude Julien",4,48,51,6,4,1,55.2,4,5
