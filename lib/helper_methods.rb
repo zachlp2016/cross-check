@@ -11,8 +11,8 @@ module HelperMethods
 
   def get_general_game_stats_by_team(team_id)
     @games.select do |game|
-      game.home_team_id = team_id ||
-      game.away_team_id = team_id
+      game.home_team_id == team_id ||
+      game.away_team_id == team_id
     end
 
   end
