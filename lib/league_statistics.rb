@@ -69,6 +69,20 @@ module LeagueStatistics
     return goals_accumulation
   end
 
+  def games_accumulation
+    games_accumulation = {}
+      group_by_team.each do |team|
+        if games_accumulation[team[0]] == nil
+          games_accumulation[team[0]] = 0
+        end
+      end
+      group_by_team.each do |team|
+          games_accumulation[team[0]] += team[1].count
+      end
+    return games_accumulation
+    binding.pry
+  end
+
   def best_defense
     best_defense = goals_accumulation.min_by do |goal|
       goal[1]
@@ -82,6 +96,9 @@ module LeagueStatistics
     end
     decipher_name(best_defense[0])
   end
+
+
+
 end
 
 # def best_defense
