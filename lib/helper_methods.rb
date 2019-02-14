@@ -5,10 +5,6 @@ module HelperMethods
     end
   end
 
-  def team_info(team_id)
-    get_team(team_id).info
-  end
-
   def get_games_by_team(team_id)
     @game_teams.select {|game| game.team_id == team_id}
   end
@@ -25,5 +21,21 @@ module HelperMethods
       season_results[season][result] += 1
     end
     return season_results
+  end
+
+  def get_outcomes_by_opponent(team_id)
+    games = get_games_by_team(team_id)
+    outcomes_against = Hash.new{|hash,opponent|
+      hash[opponent] = {win: 0, loss: 0}
+    }
+    games.each do |target_game|
+      opponent = @game_teams.find do |game|
+        game.game_id == target_game.game_id &&
+        game.team_id != target_game.team_id
+      end.team_id
+      outcome = target_game.won ? :win : :loss
+      outcomes_against[opponent][outcome] += 1
+    end
+    return outcomes_against
   end
 end
