@@ -59,17 +59,25 @@ class LeagueStatisticsTest < Minitest::Test
       17 => 0,
       16 => 0
     }
-
     assert_equal hash, @test_stat_tracker.goals_per_team
   end
 
+  def test_method_goals_accumulation
+    hash = {
+      3 => 23,
+      6 => 12,
+      5 => 16,
+      17 => 10,
+      16 => 11
+    }
+      assert_equal hash, @test_stat_tracker.goals_accumulation
+  end
+
   def test_method_best_defense_works
-    skip
-    assert_equal "Boston", @test_stat_tracker.best_defense
+    assert_equal "Detroit", @test_stat_tracker.best_defense
   end
 
   def test_method_worst_defense_works
-    skip
     assert_equal "NY Rangers", @test_stat_tracker.worst_defense
   end
 end

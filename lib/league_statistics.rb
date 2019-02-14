@@ -12,7 +12,7 @@ module LeagueStatistics
 
   def group_by_game
     games = @game_teams.group_by do |game_team|
-      game_team.game_id.to_s
+      game_team.game_id
     end
   end
 
@@ -55,26 +55,32 @@ module LeagueStatistics
     return goals_per_team
   end
 
-  def best_defense
-    goals_allowed = {}
-    @game_teams.each do |game|
+  def goals_accumulation
+    goals_accumulation = goals_per_team
       group_by_game.each_value do |game_value|
         game_value.each_index do |index|
-        if game.game_id == game_value[0].game_id && index == 0
-          # if goals_allowed[game_value[0].team_id] == nil
-            goals_allowed[game_value[0].team_id] = game_value[1].goals
-          # elsif goals_allowed[game_value[0].team_id] != nil
-            goals_allowed[game_value[0].team_id] += game_value[1].goals
-          end
-        elsif game.game_id == game_value[0].game_id && index == 1
-          elsif goals_allowed[game_value[1].team_id] == nil
-            goals_allowed[game_value[1].team_id] = game_value[0].goals
-          elsif goals_allowed[game_value[1].team_id] != nil
-            goals_allowed[game_value[1].team_id] += game_value[0].goals
+          if game_value[index].game_id == game_value[0].game_id && index == 0
+              goals_accumulation[game_value[0].team_id] += game_value[1].goals
+          else game_value[index].game_id == game_value[1].game_id && index == 1
+              goals_accumulation[game_value[1].team_id] += game_value[0].goals
           end
         end
       end
+    return goals_accumulation
+  end
+
+  def best_defense
+    best_defense = goals_accumulation.min_by do |goal|
+      goal[1]
     end
+    decipher_name(best_defense[0])
+  end
+
+  def worst_defense
+    best_defense = goals_accumulation.max_by do |goal|
+      goal[1]
+    end
+    decipher_name(best_defense[0])
   end
 end
 
