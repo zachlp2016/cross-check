@@ -18,18 +18,18 @@ module TeamStatistics
   end
 
   def average_win_percentage(team_id)
-    games = get_games_by_team(team_id)
+    games = get_team_stats_for_each_game(team_id)
     wins = games.count{|game| game.won}
     (wins.to_f / games.count).round(4) * 100
   end
 
   def most_goals_scored(team_id)
-    games = get_games_by_team(team_id)
+    games = get_team_stats_for_each_game(team_id)
     games.max_by{|game| game.goals}.goals
   end
 
   def fewest_goals_scored(team_id)
-    games = get_games_by_team(team_id)
+    games = get_team_stats_for_each_game(team_id)
     games.min_by{|game| game.goals}.goals
   end
 
@@ -88,15 +88,13 @@ module TeamStatistics
         season[type] = {total: 0.0, wins: 0.0}
       }
     }
-    @games.each do |game|
-      if game.home_team_id == team_id || game.away_team_id == team_id
-        type = game.type == "P" ? :playoffs : :regular_season
-        location = game.home_team_id == team_id ? ["home", "away"] : ["away", "home"]
-        summary[game.season][type][:total_goals_scored] += game.send("#{location[0]}_goals")
-        summary[game.season][type][:total_goals_against] += game.send("#{location[1]}_goals")
-        counter[game.season][type][:wins] += 1 if game.send("#{location[0]}_goals") > game.send("#{location[1]}_goals")
-        counter[game.season][type][:total] += 1
-      end
+    get_general_game_stats_by_team(team_id).each do |game|
+      type = game.type == "P" ? :playoffs : :regular_season
+      location = game.home_team_id == team_id ? ["home", "away"] : ["away", "home"]
+      summary[game.season][type][:total_goals_scored] += game.send("#{location[0]}_goals")
+      summary[game.season][type][:total_goals_against] += game.send("#{location[1]}_goals")
+      counter[game.season][type][:wins] += 1 if game.send("#{location[0]}_goals") > game.send("#{location[1]}_goals")
+      counter[game.season][type][:total] += 1
     end
     summary.each do |season,details|
       [:playoffs,:regular_season].each do |type|

@@ -5,12 +5,20 @@ module HelperMethods
     end
   end
 
-  def get_games_by_team(team_id)
+  def get_team_stats_for_each_game(team_id)
     @game_teams.select {|game| game.team_id == team_id}
   end
 
+  def get_general_game_stats_by_team(team_id)
+    @games.select do |game|
+      game.home_team_id = team_id ||
+      game.away_team_id = team_id
+    end
+
+  end
+
   def team_win_loss_by_season(team_id)
-    game_results = get_games_by_team(team_id)
+    game_results = get_team_stats_for_each_game(team_id)
     season_results = Hash.new{|hash,key|
       hash[key] = {win: 0, loss: 0}
     }
@@ -24,7 +32,7 @@ module HelperMethods
   end
 
   def get_outcomes_by_opponent(team_id)
-    games = get_games_by_team(team_id)
+    games = get_team_stats_for_each_game(team_id)
     outcomes_against = Hash.new{|hash,opponent|
       hash[opponent] = {win: 0, loss: 0}
     }
