@@ -1,4 +1,8 @@
 module TeamStatistics
+  def team_info(team_id)
+    get_team(team_id).info
+  end
+
   def best_season(team_id)
     season_results = team_win_loss_by_season(team_id)
     season_results.max_by do |season,results|
@@ -27,22 +31,6 @@ module TeamStatistics
   def fewest_goals_scored(team_id)
     games = get_games_by_team(team_id)
     games.min_by{|game| game.goals}.goals
-  end
-
-  def get_outcomes_by_opponent(team_id)
-    games = get_games_by_team(team_id)
-    outcomes_against = Hash.new{|hash,opponent|
-      hash[opponent] = {win: 0, loss: 0}
-    }
-    games.each do |target_game|
-      opponent = @game_teams.find do |game|
-        game.game_id == target_game.game_id &&
-        game.team_id != target_game.team_id
-      end.team_id
-      outcome = target_game.won ? :win : :loss
-      outcomes_against[opponent][outcome] += 1
-    end
-    return outcomes_against
   end
 
   def favorite_opponent(team_id)
@@ -89,30 +77,33 @@ module TeamStatistics
 
   def seasonal_summary(team_id)
     summary = Hash.new{|summary,season|
-      summary[season] = Hash.new{|season,stage|
-        season[stage] = Hash.new{|type,stat|
+      summary[season] = Hash.new{|season,type|
+        season[type] = Hash.new{|type,stat|
           type[stat] = 0
         }
       }
     }
     counter = Hash.new{|counter,season|
-      counter[season] = Hash.new{|season,stage|
-        season[stage] = [total: 0, wins: 0]
+      counter[season] = Hash.new{|season,type|
+        season[type] = {total: 0.0, wins: 0.0}
       }
     }
     @games.each do |game|
-      type = game.type == "P" ? :playoffs : :regular_season
-      location = game.home_team_id == team_id ? ["home", "away"] : ["away", "home"]
-      summary[game.season][type][:total_goals_scored] += game.send("#{location[0]}_goals")
-      summary[game.season][type][:total_goals_against] += game.send("#{location[1]}_goals")
-      counter[game.season][type][:wins] += 1 if game.send("#{location[0]}_goals") > game.send("#{location[1]}_goals")
+      if game.home_team_id == team_id || game.away_team_id == team_id
+        type = game.type == "P" ? :playoffs : :regular_season
+        location = game.home_team_id == team_id ? ["home", "away"] : ["away", "home"]
+        summary[game.season][type][:total_goals_scored] += game.send("#{location[0]}_goals")
+        summary[game.season][type][:total_goals_against] += game.send("#{location[1]}_goals")
+        counter[game.season][type][:wins] += 1 if game.send("#{location[0]}_goals") > game.send("#{location[1]}_goals")
+        counter[game.season][type][:total] += 1
+      end
     end
-    summary.each do |summary,season|
+    summary.each do |season,details|
       [:playoffs,:regular_season].each do |type|
-        if season.has_key?(type)
-          season[type][:win_percentage] = (counter[season][type].to_f / season[type].length).round(2)
-          season[type][:average_goals_scored] = (season[type][:total_goals_scored].to_f / season[type].length).round(2)
-          season[type][:average_goals_against] = (season[type][:total_goals_against].to_f / season[type].length).round(2)
+        if details.has_key?(type)
+          details[type][:win_percentage] = (counter[season][type][:wins].to_f / counter[season][type][:total]).round(2)
+          details[type][:average_goals_scored] = (details[type][:total_goals_scored].to_f / counter[season][type][:total]).round(2)
+          details[type][:average_goals_against] = (details[type][:total_goals_against].to_f / counter[season][type][:total]).round(2)
         end
       end
     end
