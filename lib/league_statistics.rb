@@ -12,7 +12,7 @@ module LeagueStatistics
 
   def group_by_game
     games = @game_teams.group_by do |game_team|
-      game_team.game_id
+      game_team.game_id.to_s
     end
   end
 
@@ -44,26 +44,37 @@ module LeagueStatistics
     end
   end
 
+  def goals_per_team
+    goals_per_team = {}
+    group_by_game.each_value do |game_array|
+      game_array.each do |game|
+        goals_per_team[game.team_id] == nil
+          goals_per_team[game.team_id] = 0
+      end
+    end
+    return goals_per_team
+  end
+
   def best_defense
     goals_allowed = {}
     @game_teams.each do |game|
       group_by_game.each_value do |game_value|
-        if game.game_id == game_value[0].game_id
-          binding.pry
-          if goals_allowed[game_value[0].team_id] == nil
+        game_value.each_index do |index|
+        if game.game_id == game_value[0].game_id && index == 0
+          # if goals_allowed[game_value[0].team_id] == nil
             goals_allowed[game_value[0].team_id] = game_value[1].goals
-          elsif goals_allowed[game_value[0].team_id] != nil
+          # elsif goals_allowed[game_value[0].team_id] != nil
             goals_allowed[game_value[0].team_id] += game_value[1].goals
-          if goals_allowed[game_value[1].team_id] == nil
+          end
+        elsif game.game_id == game_value[0].game_id && index == 1
+          elsif goals_allowed[game_value[1].team_id] == nil
             goals_allowed[game_value[1].team_id] = game_value[0].goals
           elsif goals_allowed[game_value[1].team_id] != nil
             goals_allowed[game_value[1].team_id] += game_value[0].goals
           end
-          end
         end
       end
     end
-    binding.pry
   end
 end
 

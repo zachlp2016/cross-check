@@ -33,7 +33,6 @@ class LeagueStatisticsTest < Minitest::Test
       }
 
       @test_stat_tracker = StatTracker.from_csv(@test_data)
-
   end
 
 
@@ -52,7 +51,20 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Buffalo", @stat_tracker.worst_offense
   end
 
+  def test_method_goals_per_team
+    hash = {
+      3 => 0,
+      6 => 0,
+      5 => 0,
+      17 => 0,
+      16 => 0
+    }
+
+    assert_equal hash, @test_stat_tracker.goals_per_team
+  end
+
   def test_method_best_defense_works
+    skip
     assert_equal "Boston", @test_stat_tracker.best_defense
   end
 
