@@ -17,8 +17,8 @@ class TeamStatisticsTest < Minitest::Test
     @stat_tracker = StatTracker.from_csv(@locations)
 
     @team = Team.new({
-      "team_id" => 1,
-      "franchiseId" => 23,
+      "team_id" => "1",
+      "franchiseId" => "23",
       "shortName" => "New Jersey",
       "teamName" => "Devils",
       "abbreviation" => "NJD",
@@ -26,46 +26,47 @@ class TeamStatisticsTest < Minitest::Test
   end
 
   def test_getting_team_info
-    assert_equal @team.info, @stat_tracker.team_info(1)
+    assert_equal @team.info, @stat_tracker.team_info("1")
   end
 
   def test_getting_best_season_for_a_team
-    assert_equal 20152016, @stat_tracker.best_season(2)
+    assert_equal "20152016", @stat_tracker.best_season("2")
   end
 
   def test_getting_worst_season_for_a_team
-    assert_equal 20122013, @stat_tracker.worst_season(2)
+    assert_equal "20122013", @stat_tracker.worst_season("2")
   end
 
   def test_getting_average_win_percentage
-    assert_equal 41.67, @stat_tracker.average_win_percentage(2)
+    assert_equal 41.67, @stat_tracker.average_win_percentage("2")
   end
 
   def test_getting_most_goals_scored
-    assert_equal 6, @stat_tracker.most_goals_scored(2)
+    assert_equal 6, @stat_tracker.most_goals_scored("2")
   end
 
   def test_getting_fewest_goals_scored
-    assert_equal 0, @stat_tracker.fewest_goals_scored(2)
+    assert_equal 0, @stat_tracker.fewest_goals_scored("2")
   end
 
   def test_getting_favorite_opponent
-    assert_equal "Panthers", @stat_tracker.favorite_opponent(2)
+    assert_equal "Panthers", @stat_tracker.favorite_opponent("2")
   end
 
   def test_getting_rival
-    assert_equal "Lightning", @stat_tracker.rival(2)
+    assert_equal "Lightning", @stat_tracker.rival("2")
   end
 
   def test_getting_biggest_blowout
-    assert_equal 3, @stat_tracker.biggest_team_blowout(2)
+    assert_equal 3, @stat_tracker.biggest_team_blowout("2")
   end
 
   def test_getting_worst_loss
-    assert_equal 5, @stat_tracker.worst_loss(2)
+    assert_equal 5, @stat_tracker.worst_loss("2")
   end
 
   def test_getting_head_to_head_comparison
+    skip
     expectation = {win: 3, loss: 4}
     assert_equal expectation, @stat_tracker.head_to_head(2, 15)
   end
@@ -105,8 +106,8 @@ class TeamStatisticsTest < Minitest::Test
         average_goals_against: 3.26
       }
     }
-    assert_equal expectation_2012, stat_tracker.seasonal_summary(2)[20122013]
-    assert_equal expectation_2013, stat_tracker.seasonal_summary(2)[20132014]
+    assert_equal expectation_2012, stat_tracker.seasonal_summary("2")["20122013"]
+    assert_equal expectation_2013, stat_tracker.seasonal_summary("2")["20132014"]
   end
 end
 

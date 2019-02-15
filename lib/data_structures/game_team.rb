@@ -22,14 +22,14 @@ class GameTeam
     @won = details["won"]
     @settled_in = details["settled_in"]
     @head_coach = details["head_coach"]
-    @goals = details["goals"]
-    @shots = details["shots"]
-    @hits = details["hits"]
-    @pim = details["pim"]
-    @power_play_opportunities = details["powerPlayOpportunities"]
-    @power_play_goals = details["powerPlayGoals"]
-    @face_off_win_percentage = details["faceOffWinPercentage"]
-    @giveaways = details["giveaways"]
-    @takeaways = details["takeaways"]
+    @goals = details["goals"].to_i
+    @shots = details["shots"].to_i
+    @hits = details["hits"].to_i
+    @pim = details["pim"].to_i
+    @power_play_opportunities = details["powerPlayOpportunities"].to_i
+    @power_play_goals = details["powerPlayGoals"].to_i
+    @face_off_win_percentage = details["faceOffWinPercentage"].to_f
+    @giveaways = details["giveaways"].to_i
+    @takeaways = details["takeaways"].to_i
   end
 end

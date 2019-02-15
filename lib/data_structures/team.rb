@@ -15,11 +15,11 @@ class Team
   end
 
   def info
-    {team_id: @team_id,
-    franchise_id: @franchise_id,
-    short_name: @short_name,
-    team_name: @team_name,
-    abbreviation: @abbreviation,
-    link: @link}
+    {"team_id" => @team_id,
+    "franchise_id" => @franchise_id,
+    "short_name" => @short_name,
+    "team_name" => @team_name,
+    "abbreviation" => @abbreviation,
+    "link" => @link}
   end
 end

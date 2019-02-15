@@ -47,33 +47,33 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_method_goals_per_team
     hash = {
-      3 => 0,
-      6 => 0,
-      5 => 0,
-      17 => 0,
-      16 => 0
+      "3" => 0,
+      "6" => 0,
+      "5" => 0,
+      "17" => 0,
+      "16" => 0
     }
     assert_equal hash, @test_stat_tracker.goals_per_team
   end
 
   def test_method_goals_accumulation
     hash = {
-      3 => 23,
-      6 => 7,
-      5 => 16,
-      17 => 10,
-      16 => 11
+      "3" => 23,
+      "6" => 7,
+      "5" => 16,
+      "17" => 10,
+      "16" => 11
     }
       assert_equal hash, @test_stat_tracker.goals_accumulation
   end
 
   def test_method_game_count_works
     hash = {
-      3=>5,
-      6=>9,
-      5=>4,
-      17=>5,
-      16=>5
+      "3"=>5,
+      "6"=>9,
+      "5"=>4,
+      "17"=>5,
+      "16"=>5
     }
     assert_equal hash, @test_stat_tracker.games_accumulation
   end

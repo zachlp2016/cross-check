@@ -28,7 +28,7 @@ class StatTracker
   end
 
   def self.from_csv(files)
-    options = {headers: true, converters: [:numeric, :true_false_string_to_bool]}
+    options = {headers: true, converters: [:true_false_string_to_bool]}
     StatTracker.new({
         games: CSV.open(files[:games], options),
         teams: CSV.open(files[:teams], options),

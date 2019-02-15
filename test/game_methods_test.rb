@@ -44,12 +44,12 @@ class GameMethodsTest < Minitest::Test
   end
 
   def test_count_of_games_by_season
-    assert_equal 86, @stat_tracker.total_count_of_games_by_season(20122013)
-    assert_equal 93, @stat_tracker.total_count_of_games_by_season(20132014)
-    assert_equal 89, @stat_tracker.total_count_of_games_by_season(20142015)
-    assert_equal 91, @stat_tracker.total_count_of_games_by_season(20152016)
-    assert_equal 87, @stat_tracker.total_count_of_games_by_season(20162017)
-    assert_equal 84, @stat_tracker.total_count_of_games_by_season(20172018)
+    assert_equal 86, @stat_tracker.total_count_of_games_by_season("20122013")
+    assert_equal 93, @stat_tracker.total_count_of_games_by_season("20132014")
+    assert_equal 89, @stat_tracker.total_count_of_games_by_season("20142015")
+    assert_equal 91, @stat_tracker.total_count_of_games_by_season("20152016")
+    assert_equal 87, @stat_tracker.total_count_of_games_by_season("20162017")
+    assert_equal 84, @stat_tracker.total_count_of_games_by_season("20172018")
   end
 
   def test_average_goals_per_game
@@ -57,12 +57,12 @@ class GameMethodsTest < Minitest::Test
    end
 
    def test_average_goals_by_season
-     assert_equal 5.02, @stat_tracker.average_goals_by_season(20122013)
-     assert_equal 5.59, @stat_tracker.average_goals_by_season(20132014)
-     assert_equal 5.03, @stat_tracker.average_goals_by_season(20142015)
-     assert_equal 5.25, @stat_tracker.average_goals_by_season(20152016)
-     assert_equal 5.16, @stat_tracker.average_goals_by_season(20162017)
-     assert_equal 5.9, @stat_tracker.average_goals_by_season(20172018)
+     assert_equal 5.02, @stat_tracker.average_goals_by_season("20122013")
+     assert_equal 5.59, @stat_tracker.average_goals_by_season("20132014")
+     assert_equal 5.03, @stat_tracker.average_goals_by_season("20142015")
+     assert_equal 5.25, @stat_tracker.average_goals_by_season("20152016")
+     assert_equal 5.16, @stat_tracker.average_goals_by_season("20162017")
+     assert_equal 5.9, @stat_tracker.average_goals_by_season("20172018")
    end
 
 end

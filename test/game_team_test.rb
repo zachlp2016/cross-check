@@ -19,15 +19,15 @@ class GameTeamTest < Minitest::Test
       "won" => "FALSE",
       "settled_in" => "OT",
       "head_coach" => "John Tortorella",
-      "goals" => 2,
-      "shots" => 35,
-      "hits" => 44,
-      "pim" => 8,
-      "powerPlayOpportunities" => 3,
-      "powerPlayGoals" => 0,
-      "faceOffWinPercentage" => 44.8,
-      "giveaways" => 17,
-      "takeaways" => 7})
+      "goals" => "2",
+      "shots" => "35",
+      "hits" => "44",
+      "pim" => "8",
+      "powerPlayOpportunities" => "3",
+      "powerPlayGoals" => "0",
+      "faceOffWinPercentage" => "44.8",
+      "giveaways" => "17",
+      "takeaways" => "7"})
   end
 
   def test_team_exists
