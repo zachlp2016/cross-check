@@ -83,23 +83,33 @@ class TeamStatisticsTest < Minitest::Test
       game_teams: game_teams_path
     }
     stat_tracker = StatTracker.from_csv(locations)
-    expectation = {
+    expectation_2012 = {
       regular_season: {
-        win_percentage: 0.49,
-        total_goals_scored: 1353,
-        total_goals_against: 1390,
-        average_goals_scored: 2.95,
-        average_goals_against: 3.03
+        win_percentage: 0.50,
+        total_goals_scored: 139,
+        total_goals_against: 139,
+        average_goals_scored: 2.90,
+        average_goals_against: 2.90
       },
       playoffs: {
-        win_percentage: 0.42,
-        total_goals_scored: 58,
-        total_goals_against: 73,
-        average_goals_scored: 2.42,
-        average_goals_against: 3.04
+        win_percentage: 0.33,
+        total_goals_scored: 17,
+        total_goals_against: 25,
+        average_goals_scored: 2.83,
+        average_goals_against: 4.17
       }
     }
-    assert_equal expectation, stat_tracker.seasonal_summary(2)
+    expectation_2013 = {
+      regular_season: {
+        win_percentage: 0.41,
+        total_goals_scored: 225,
+        total_goals_against: 267,
+        average_goals_scored: 2.74,
+        average_goals_against: 3.26
+      }
+    }
+    assert_equal expectation_2012, stat_tracker.seasonal_summary(2)[20122013]
+    assert_equal expectation_2013, stat_tracker.seasonal_summary(2)[20132014]
   end
 end
 
