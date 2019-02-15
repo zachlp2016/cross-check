@@ -1,10 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/team'
-require './lib/game_team'
-require './lib/game'
 require './lib/stat_tracker'
-require './lib/league_statistics'
 require 'pry'
 
 class LeagueStatisticsTest < Minitest::Test

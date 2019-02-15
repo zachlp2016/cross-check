@@ -1,4 +1,3 @@
-require './lib/stat_tracker'
 module GameMethods
 
   def highest_total_score

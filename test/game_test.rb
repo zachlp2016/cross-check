@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/stat_tracker.rb'
-require './lib/game'
+require './lib/stat_tracker'
 require 'pry'
 
 class GameTest < Minitest::Test

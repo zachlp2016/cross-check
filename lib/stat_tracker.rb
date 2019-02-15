@@ -1,9 +1,12 @@
 require 'csv'
-require './lib/true_false_converter'
-require './lib/team_statistics'
-require './lib/league_statistics'
-require './lib/game_methods'
-require './lib/helper_methods'
+require_relative './game'
+require_relative './team'
+require_relative './game_team'
+require_relative './true_false_converter'
+require_relative './team_statistics'
+require_relative './league_statistics'
+require_relative './game_methods'
+require_relative './helper_methods'
 
 class StatTracker
   include TrueFalseConverter
