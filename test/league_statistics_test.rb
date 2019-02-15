@@ -7,12 +7,12 @@ class LeagueStatisticsTest < Minitest::Test
 
   def setup
 
-      @game_path = './data/game_test.csv'
+      @game_path = './test/data/game_test.csv'
       @team_path = './data/team_info.csv'
-      @game_team_path = './data/game_teams_stats.csv'
+      @game_team_path = './test/data/game_teams_stats.csv'
 
-      @game_team_test_path = './data/test/game_teams_league_stats_test.csv'
-      @game_test_path = './data/test/game_league_stats_test.csv'
+      @game_team_test_path = './test/data/game_teams_league_stats_test.csv'
+      @game_test_path = './test/data/game_league_stats_test.csv'
 
       @locations = {
         games: @game_path,

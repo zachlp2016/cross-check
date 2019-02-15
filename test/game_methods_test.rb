@@ -6,9 +6,9 @@ require 'pry'
 class GameMethodsTest < Minitest::Test
 
   def setup
-    @game_path = './data/game_test.csv'
+    @game_path = './test/data/game_test.csv'
     @team_path = './data/team_info.csv'
-    @game_teams_path = './data/game_teams_stats_test.csv'
+    @game_teams_path = './test/data/game_teams_stats_test.csv'
     @locations = {
       games: @game_path,
       teams: @team_path,
