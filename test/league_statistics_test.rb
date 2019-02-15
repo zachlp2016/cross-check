@@ -24,7 +24,7 @@ class LeagueStatisticsTest < Minitest::Test
         game_teams: @game_team_path
       }
 
-      @stat_tracker = StatTracker.from_csv(@locations)
+      # @stat_tracker = StatTracker.from_csv(@locations)
 
       @test_data = {
         games: @game_test_path,
@@ -38,17 +38,15 @@ class LeagueStatisticsTest < Minitest::Test
 
 
   def test_method_count_of_teams
-    assert_equal 33, @stat_tracker.count_of_teams
+    assert_equal 33, @test_stat_tracker.count_of_teams
   end
 
   def test_method_best_offense_works
     assert_equal "Boston", @test_stat_tracker.best_offense
-    assert_equal "Vegas", @stat_tracker.best_offense
   end
 
   def test_method_worst_offense_works
     assert_equal "Pittsburgh", @test_stat_tracker.worst_offense
-    assert_equal "Buffalo", @stat_tracker.worst_offense
   end
 
   def test_method_goals_per_team
@@ -65,7 +63,7 @@ class LeagueStatisticsTest < Minitest::Test
   def test_method_goals_accumulation
     hash = {
       3 => 23,
-      6 => 12,
+      6 => 7,
       5 => 16,
       17 => 10,
       16 => 11
@@ -85,7 +83,7 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_best_defense_works
-    assert_equal "Detroit", @test_stat_tracker.best_defense
+    assert_equal "Boston", @test_stat_tracker.best_defense
   end
 
   def test_method_worst_defense_works

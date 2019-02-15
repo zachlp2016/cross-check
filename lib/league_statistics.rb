@@ -80,22 +80,22 @@ module LeagueStatistics
           games_accumulation[team[0]] += team[1].count
       end
     return games_accumulation
-    binding.pry
   end
 
   def best_defense
-    best_defense = goals_accumulation.min_by do |goal|
-      goal[1]
+    best_defense = games_accumulation.min_by do |game|
+      (goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
     end
     decipher_name(best_defense[0])
   end
 
   def worst_defense
-    best_defense = goals_accumulation.max_by do |goal|
-      goal[1]
+    worst_defense = games_accumulation.max_by do |game|
+      (goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
     end
-    decipher_name(best_defense[0])
+    decipher_name(worst_defense[0])
   end
+
 
 
 
