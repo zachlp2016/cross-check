@@ -55,14 +55,30 @@ module GameMethods
   end
 
   def total_count_of_games_by_season(season)
-    seasons = @games.group_by do |season|
-      season.season
-    end
-      seasons.fetch_values(season)[0].count
+    seasons[season].count
   end
 
   def average_goals_per_game
-
+    total_goals = @games.sum do |game|
+      game.home_goals + game.away_goals
+    end
+    (total_goals.to_f/total_games).round(2)
   end
 
+  def average_goals_by_season(season_years)
+    season_goals = @games.map do |game|
+      if game.season == season_years
+      game.home_goals + game.away_goals
+      end
+    end
+    total_season_goals = season_goals.compact.sum
+
+    (total_season_goals.to_f/total_count_of_games_by_season(season_years)).round(2)
+  end
+
+  def seasons
+    @games.group_by do |season|
+      season.season
+    end
+  end
 end
