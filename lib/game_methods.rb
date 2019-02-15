@@ -66,12 +66,11 @@ module GameMethods
   end
 
   def average_goals_by_season(season_years)
-    season_goals = @games.map do |game|
+    total_season_goals = @games.map do |game|
       if game.season == season_years
       game.home_goals + game.away_goals
       end
-    end
-    total_season_goals = season_goals.compact.sum
+    end.compact.sum
 
     (total_season_goals.to_f/total_count_of_games_by_season(season_years)).round(2)
   end
