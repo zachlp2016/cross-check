@@ -1,9 +1,12 @@
 require 'csv'
-require './lib/true_false_converter'
-require './lib/team_statistics'
-require './lib/league_statistics'
-require './lib/game_methods'
-require './lib/helper_methods'
+require_relative './data_structures/game'
+require_relative './data_structures/team'
+require_relative './data_structures/game_team'
+require_relative './modules/true_false_converter'
+require_relative './modules/team_statistics'
+require_relative './modules/league_statistics'
+require_relative './modules/game_methods'
+require_relative './modules/helper_methods'
 
 class StatTracker
   include TrueFalseConverter
@@ -25,7 +28,7 @@ class StatTracker
   end
 
   def self.from_csv(files)
-    options = {headers: true, converters: [:numeric, :true_false_string_to_bool]}
+    options = {headers: true, converters: [:true_false_string_to_bool]}
     StatTracker.new({
         games: CSV.open(files[:games], options),
         teams: CSV.open(files[:teams], options),

@@ -1,8 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/stat_tracker'
-require './lib/team'
-require './lib/game_team'
 require 'pry'
 
 class StatTrackerTest < Minitest::Test
@@ -10,9 +8,9 @@ class StatTrackerTest < Minitest::Test
   def setup
     @empty_stat_tracker = StatTracker.new
 
-    @game_path = './data/game_test.csv'
+    @game_path = './test/data/game_test.csv'
     @team_path = './data/team_info.csv'
-    @game_teams_path = './data/game_teams_stats_test.csv'
+    @game_teams_path = './test/data/game_teams_stats_test.csv'
     @locations = {
       games: @game_path,
       teams: @team_path,

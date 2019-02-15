@@ -1,22 +1,18 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/team'
-require './lib/game_team'
-require './lib/game'
 require './lib/stat_tracker'
-require './lib/league_statistics'
 require 'pry'
 
 class LeagueStatisticsTest < Minitest::Test
 
   def setup
 
-      @game_path = './data/game_test.csv'
+      @game_path = './test/data/game_test.csv'
       @team_path = './data/team_info.csv'
-      @game_team_path = './data/game_teams_stats.csv'
+      @game_team_path = './test/data/game_teams_stats.csv'
 
-      @game_team_test_path = './data/test/game_teams_league_stats_test.csv'
-      @game_test_path = './data/test/game_league_stats_test.csv'
+      @game_team_test_path = './test/data/game_teams_league_stats_test.csv'
+      @game_test_path = './test/data/game_league_stats_test.csv'
 
       @locations = {
         games: @game_path,
@@ -51,33 +47,33 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_method_goals_per_team
     hash = {
-      3 => 0,
-      6 => 0,
-      5 => 0,
-      17 => 0,
-      16 => 0
+      "3" => 0,
+      "6" => 0,
+      "5" => 0,
+      "17" => 0,
+      "16" => 0
     }
     assert_equal hash, @test_stat_tracker.goals_per_team
   end
 
   def test_method_goals_accumulation
     hash = {
-      3 => 23,
-      6 => 7,
-      5 => 16,
-      17 => 10,
-      16 => 11
+      "3" => 23,
+      "6" => 7,
+      "5" => 16,
+      "17" => 10,
+      "16" => 11
     }
       assert_equal hash, @test_stat_tracker.goals_accumulation
   end
 
   def test_method_game_count_works
     hash = {
-      3=>5,
-      6=>9,
-      5=>4,
-      17=>5,
-      16=>5
+      "3"=>5,
+      "6"=>9,
+      "5"=>4,
+      "17"=>5,
+      "16"=>5
     }
     assert_equal hash, @test_stat_tracker.games_accumulation
   end
