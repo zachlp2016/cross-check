@@ -7,14 +7,14 @@ module TeamStatistics
     season_results = team_win_loss_by_season(team_id)
     season_results.max_by do |season,results|
       results[:win].to_f / (results[:win] + results[:loss])
-    end[0].to_i
+    end[0]
   end
 
   def worst_season(team_id)
     season_results = team_win_loss_by_season(team_id)
     season_results.min_by do |season,results|
       results[:win].to_f / (results[:win] + results[:loss])
-    end[0].to_i
+    end[0]
   end
 
   def average_win_percentage(team_id)
