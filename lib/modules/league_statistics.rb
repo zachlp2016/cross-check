@@ -167,10 +167,18 @@ module LeagueStatistics
   end
 
   def win_accumulation
-
-  end
-
-  def winningest_team
+    win_accumulator = goals_per_team
+    group_by_team.each do |team|
+      team[1].each do |game|
+        if game.won == true
+        win_accumulator[team[0]] += 1
+        end
+      end
+    end
+    return win_accumulator
     binding.pry
   end
+
+  # def winningest_team
+  # end
 end

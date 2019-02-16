@@ -146,13 +146,15 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_win_accumulation_works
-  hash =  {"3"=>2,
-          "6"=>16,
-          "5"=>1,
-          "17"=>5,
-          "16"=>9}
-          }
-    assert_equal hash
+  hash =  {
+          "3"=>1,
+          "6"=>8,
+          "5"=>0,
+          "17"=>3,
+          "16"=>2
+        }
+
+    assert_equal hash, @test_stat_tracker.win_accumulation
   end
 
   def test_method_for_winningest_team
