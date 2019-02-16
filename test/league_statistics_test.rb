@@ -38,11 +38,11 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_best_offense_works
-    assert_equal "Boston", @test_stat_tracker.best_offense
+    assert_equal "Bruins", @test_stat_tracker.best_offense
   end
 
   def test_method_worst_offense_works
-    assert_equal "Pittsburgh", @test_stat_tracker.worst_offense
+    assert_equal "Penguins", @test_stat_tracker.worst_offense
   end
 
   def test_method_goals_per_team
@@ -79,10 +79,17 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_best_defense_works
-    assert_equal "Boston", @test_stat_tracker.best_defense
+    assert_equal "Bruins", @test_stat_tracker.best_defense
   end
 
   def test_method_worst_defense_works
-    assert_equal "NY Rangers", @test_stat_tracker.worst_defense
+    assert_equal "Rangers", @test_stat_tracker.worst_defense
+  end
+
+  # Name of the team with the highest average score per
+  # game across all seasons when they are away.
+
+  def test_away_team_highest_average_score
+    assert_equal "Rangers", @test_stat_tracker.highest_scoring_visitor
   end
 end

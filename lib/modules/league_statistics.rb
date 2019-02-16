@@ -39,7 +39,7 @@ module LeagueStatistics
   def decipher_name(team_id)
     teams.each do |team|
       if team_id == team.team_id
-        return team.short_name
+        return team.team_name
       end
     end
   end
@@ -96,9 +96,20 @@ module LeagueStatistics
     decipher_name(worst_defense[0])
   end
 
-
-
-
+  def highest_scoring_visitor
+    visitor_goals_accumulation = goals_per_team
+      group_by_game.each_value do |game_value|
+        game_value.each_index do |index|
+          if game_value[index].game_id == game_value[0].game_id && index == 0
+              goals_accumulation[game_value[0].team_id] += game_value[0].goals
+          end
+        end
+      end
+      highest_scoring_visitor = visitor_goals_accumulation.max_by do |game|
+        binding.pry
+      end
+    return highest_scoring_visitor
+  end
 end
 
 # def best_defense
