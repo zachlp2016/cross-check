@@ -71,8 +71,14 @@ module TeamStatistics
     (max.away_goals - max.home_goals).abs
   end
 
-  def head_to_head(team_id, opponent_id)
-    get_outcomes_by_opponent(team_id)[opponent_id]
+  def head_to_head(team_id)
+    output = {}
+    get_outcomes_by_opponent(team_id).each do |opponent_id,outcome|
+      opponent_name = get_team(opponent_id).team_name
+      games_played = outcome[:win] + outcome[:loss].to_f
+      output[opponent_name] = (outcome[:win] / games_played).round(2)
+    end
+    return output
   end
 
   def seasonal_summary(team_id)
