@@ -20,7 +20,7 @@ module TeamStatistics
   def average_win_percentage(team_id)
     games = get_team_stats_for_each_game(team_id)
     wins = games.count{|game| game.won}
-    (wins.to_f / games.count).round(4) * 100
+    (wins.to_f / games.count).round(2)
   end
 
   def most_goals_scored(team_id)
