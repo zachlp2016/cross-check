@@ -66,9 +66,13 @@ class TeamStatisticsTest < Minitest::Test
   end
 
   def test_getting_head_to_head_comparison
-    skip
-    expectation = {win: 3, loss: 4}
-    assert_equal expectation, @stat_tracker.head_to_head(2, 15)
+    expectation = {
+      "Lightning" => 0.2,
+      "Capitals" => 0.43,
+      "Penguins" => 0.33,
+      "Panthers" => 0.67
+    }
+    assert_equal expectation, @stat_tracker.head_to_head("2")
   end
 
   def test_getting_seasonal_summary
