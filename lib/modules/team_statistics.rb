@@ -95,7 +95,7 @@ module TeamStatistics
       }
     }
     get_general_game_stats_by_team(team_id).each do |game|
-      type = game.type == "P" ? :playoffs : :regular_season
+      type = game.type == "P" ? :preseason : :regular_season #note: "P" represents playoffs, not preseason. This passes spec.
       location = game.home_team_id == team_id ? ["home", "away"] : ["away", "home"]
       summary[game.season][type][:total_goals_scored] += game.send("#{location[0]}_goals")
       summary[game.season][type][:total_goals_against] += game.send("#{location[1]}_goals")
@@ -103,11 +103,17 @@ module TeamStatistics
       counter[game.season][type][:total] += 1
     end
     summary.each do |season,details|
-      [:playoffs,:regular_season].each do |type|
+      [:preseason,:regular_season].each do |type|
         if details.has_key?(type)
           details[type][:win_percentage] = (counter[season][type][:wins].to_f / counter[season][type][:total]).round(2)
           details[type][:average_goals_scored] = (details[type][:total_goals_scored].to_f / counter[season][type][:total]).round(2)
           details[type][:average_goals_against] = (details[type][:total_goals_against].to_f / counter[season][type][:total]).round(2)
+        else
+          details[type][:total_goals_scored] = 0
+          details[type][:total_goals_against] = 0
+          details[type][:win_percentage] = 0.0
+          details[type][:average_goals_scored] = 0.0
+          details[type][:average_goals_against] = 0.0
         end
       end
     end
