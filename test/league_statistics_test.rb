@@ -103,6 +103,17 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal hash, @test_stat_tracker.visitor_games_accumulation
   end
 
+  def test_away_team_goals_accumulation_works
+
+    hash = {"3"=>3,
+            "6"=>23,
+            "5"=>1,
+            "17"=>6,
+            "16"=>1}
+
+    assert_equal hash, @test_stat_tracker.visitor_goals_accumulation
+  end
+
   def test_home_team_games_accumulation_works
     hash = {"6"=>5,
             "3"=>2,
@@ -113,15 +124,30 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal hash, @test_stat_tracker.home_games_accumulation
   end
 
+  def test_home_team_goals_accumulation_works
+    hash = {"3"=>2,
+            "6"=>16,
+            "5"=>1,
+            "17"=>5,
+            "16"=>9
+          }
+
+    assert_equal hash, @test_stat_tracker.home_goals_accumulation
+  end
+
   def test_away_team_highest_average_score
     assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
   end
 
   def test_home_team_highest_average_score
-    assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
+    assert_equal "Bruins", @test_stat_tracker.highest_scoring_home_team
   end
 
   def test_lowest_scoring_visitor
     assert_equal "Penguins", @test_stat_tracker.lowest_scoring_visitor
+  end
+
+  def test_lowest_scoring_home_team
+    assert_equal "Penguins", @test_stat_tracker.lowest_scoring_home_team
   end
 end
