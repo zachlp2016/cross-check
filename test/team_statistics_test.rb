@@ -93,7 +93,7 @@ class TeamStatisticsTest < Minitest::Test
         average_goals_scored: 2.90,
         average_goals_against: 2.90
       },
-      playoffs: {
+      preseason: {
         win_percentage: 0.33,
         total_goals_scored: 17,
         total_goals_against: 25,
@@ -109,7 +109,7 @@ class TeamStatisticsTest < Minitest::Test
         average_goals_scored: 2.74,
         average_goals_against: 3.26
       },
-      playoffs: {
+      preseason: {
         win_percentage: 0.0,
         total_goals_scored: 0,
         total_goals_against: 0,
