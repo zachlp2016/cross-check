@@ -89,7 +89,23 @@ class LeagueStatisticsTest < Minitest::Test
   # Name of the team with the highest average score per
   # game across all seasons when they are away.
 
+  def test_away_team_games_accumulation_works
+    
+    hash = {
+      "3"=>5,
+      "6"=>9,
+      "5"=>4,
+      "17"=>5,
+      "16"=>5
+    }
+    assert_equal hash, @test_stat_tracker.visitor_games_accumulation
+  end
+
   def test_away_team_highest_average_score
+    assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
+  end
+
+  def test_home_team_highest_average_score
     assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
   end
 end
