@@ -82,6 +82,32 @@ module LeagueStatistics
     return games_accumulation
   end
 
+  def visitor_games_accumulation
+    games_accumulation = {}
+      group_by_game.each_value do |game_value|
+        if games_accumulation[game_value[0].team_id] == nil
+          games_accumulation[game_value[0].team_id] = 0
+        end
+      end
+      group_by_game.each_value do |game_value|
+        games_accumulation[game_value[0].team_id] += 1
+      end
+    return games_accumulation
+  end
+
+  def home_games_accumulation
+    games_accumulation = {}
+      group_by_game.each_value do |game_value|
+        if games_accumulation[game_value[1].team_id] == nil
+          games_accumulation[game_value[1].team_id] = 0
+        end
+      end
+      group_by_game.each_value do |game_value|
+        games_accumulation[game_value[1].team_id] += 1
+      end
+    return games_accumulation
+  end
+
   def best_defense
     best_defense = games_accumulation.min_by do |game|
       (goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
@@ -91,7 +117,6 @@ module LeagueStatistics
 
   def worst_defense
     worst_defense = games_accumulation.max_by do |game|
-      binding.pry
       (goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
     end
     decipher_name(worst_defense[0])
@@ -103,7 +128,6 @@ module LeagueStatistics
             visitor_goals_accumulation[game_value[0].team_id] += game_value[0].goals
     end
     highest_scoring_visitor = visitor_games_accumulation.max_by do |game|
-      binding.pry
         (visitor_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
     end
     return decipher_name(highest_scoring_visitor[0])
@@ -114,9 +138,9 @@ module LeagueStatistics
     group_by_game.each_value do |game_value|
             home_goals_accumulation[game_value[1].team_id] += game_value[1].goals
     end
-    highest_scoring_home = home_goals_accumulation.max_by do |game|
-      game[1]
-    end
+    highest_scoring_home = home_games_accumulation.max_by do |game|
+        (home_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
+      end
     return decipher_name(highest_scoring_home[0])
   end
 end

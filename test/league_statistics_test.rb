@@ -90,14 +90,13 @@ class LeagueStatisticsTest < Minitest::Test
   # game across all seasons when they are away.
 
   def test_away_team_games_accumulation_works
-    
-    hash = {
-      "3"=>5,
-      "6"=>9,
-      "5"=>4,
-      "17"=>5,
-      "16"=>5
-    }
+    hash = {"3"=>3,
+            "6"=>4,
+            "5"=>2,
+            "17"=>3,
+            "16"=>2
+          }
+
     assert_equal hash, @test_stat_tracker.visitor_games_accumulation
   end
 
