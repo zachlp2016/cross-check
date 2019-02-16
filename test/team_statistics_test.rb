@@ -108,6 +108,13 @@ class TeamStatisticsTest < Minitest::Test
         total_goals_against: 267,
         average_goals_scored: 2.74,
         average_goals_against: 3.26
+      },
+      playoffs: {
+        win_percentage: 0.0,
+        total_goals_scored: 0,
+        total_goals_against: 0,
+        average_goals_scored: 0.0,
+        average_goals_against: 0.0
       }
     }
     assert_equal expectation_2012, stat_tracker.seasonal_summary("2")["20122013"]
