@@ -90,6 +90,6 @@ class LeagueStatisticsTest < Minitest::Test
   # game across all seasons when they are away.
 
   def test_away_team_highest_average_score
-    assert_equal "Rangers", @test_stat_tracker.highest_scoring_visitor
+    assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
   end
 end

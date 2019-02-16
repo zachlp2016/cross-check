@@ -98,17 +98,13 @@ module LeagueStatistics
 
   def highest_scoring_visitor
     visitor_goals_accumulation = goals_per_team
-      group_by_game.each_value do |game_value|
-        game_value.each_index do |index|
-          if game_value[index].game_id == game_value[0].game_id && index == 0
-              goals_accumulation[game_value[0].team_id] += game_value[0].goals
-          end
-        end
-      end
-      highest_scoring_visitor = visitor_goals_accumulation.max_by do |game|
-        binding.pry
-      end
-    return highest_scoring_visitor
+    group_by_game.each_value do |game_value|
+            visitor_goals_accumulation[game_value[0].team_id] += game_value[0].goals
+    end
+    highest_scoring_visitor = visitor_goals_accumulation.max_by do |game|
+      game[1]
+    end
+    return decipher_name(highest_scoring_visitor[0])
   end
 end
 
