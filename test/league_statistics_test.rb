@@ -31,14 +31,8 @@ class LeagueStatisticsTest < Minitest::Test
       @test_stat_tracker = StatTracker.from_csv(@test_data)
   end
 
-
-
   def test_method_count_of_teams
     assert_equal 33, @test_stat_tracker.count_of_teams
-  end
-
-  def test_method_group_by_teams
-
   end
 
   def test_method_best_offense_works
@@ -149,5 +143,20 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_lowest_scoring_home_team
     assert_equal "Penguins", @test_stat_tracker.lowest_scoring_home_team
+  end
+
+  def test_method_win_accumulation_works
+  hash =  {"3"=>2,
+          "6"=>16,
+          "5"=>1,
+          "17"=>5,
+          "16"=>9}
+          }
+    assert_equal hash
+  end
+
+  def test_method_for_winningest_team
+    skip
+    assert_equal "Bruins", @test_stat_tracker.winningest_team
   end
 end
