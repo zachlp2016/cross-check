@@ -37,6 +37,10 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal 33, @test_stat_tracker.count_of_teams
   end
 
+  def test_method_group_by_teams
+
+  end
+
   def test_method_best_offense_works
     assert_equal "Bruins", @test_stat_tracker.best_offense
   end
@@ -96,8 +100,17 @@ class LeagueStatisticsTest < Minitest::Test
             "17"=>3,
             "16"=>2
           }
-
     assert_equal hash, @test_stat_tracker.visitor_games_accumulation
+  end
+
+  def test_home_team_games_accumulation_works
+    hash = {"6"=>5,
+            "3"=>2,
+            "5"=>2,
+            "16"=>3,
+            "17"=>2
+          }
+    assert_equal hash, @test_stat_tracker.home_games_accumulation
   end
 
   def test_away_team_highest_average_score
@@ -106,5 +119,9 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_home_team_highest_average_score
     assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
+  end
+
+  def test_lowest_scoring_visitor
+    assert_equal "Penguins", @test_stat_tracker.lowest_scoring_visitor
   end
 end

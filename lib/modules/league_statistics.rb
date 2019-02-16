@@ -143,6 +143,17 @@ module LeagueStatistics
       end
     return decipher_name(highest_scoring_home[0])
   end
+
+  def lowest_scoring_visitor
+    visitor_goals_accumulation = goals_per_team
+    group_by_game.each_value do |game_value|
+            visitor_goals_accumulation[game_value[0].team_id] += game_value[0].goals
+    end
+    highest_scoring_visitor = visitor_games_accumulation.min_by do |game|
+        (visitor_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
+    end
+    return decipher_name(highest_scoring_visitor[0])
+  end
 end
 
 # def best_defense
