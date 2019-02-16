@@ -38,7 +38,7 @@ class TeamStatisticsTest < Minitest::Test
   end
 
   def test_getting_average_win_percentage
-    assert_equal 41.67, @stat_tracker.average_win_percentage("2")
+    assert_equal 0.42, @stat_tracker.average_win_percentage("2")
   end
 
   def test_getting_most_goals_scored
@@ -66,9 +66,13 @@ class TeamStatisticsTest < Minitest::Test
   end
 
   def test_getting_head_to_head_comparison
-    skip
-    expectation = {win: 3, loss: 4}
-    assert_equal expectation, @stat_tracker.head_to_head(2, 15)
+    expectation = {
+      "Lightning" => 0.2,
+      "Capitals" => 0.43,
+      "Penguins" => 0.33,
+      "Panthers" => 0.67
+    }
+    assert_equal expectation, @stat_tracker.head_to_head("2")
   end
 
   def test_getting_seasonal_summary
@@ -89,7 +93,7 @@ class TeamStatisticsTest < Minitest::Test
         average_goals_scored: 2.90,
         average_goals_against: 2.90
       },
-      playoffs: {
+      preseason: {
         win_percentage: 0.33,
         total_goals_scored: 17,
         total_goals_against: 25,
@@ -104,6 +108,13 @@ class TeamStatisticsTest < Minitest::Test
         total_goals_against: 267,
         average_goals_scored: 2.74,
         average_goals_against: 3.26
+      },
+      preseason: {
+        win_percentage: 0.0,
+        total_goals_scored: 0,
+        total_goals_against: 0,
+        average_goals_scored: 0.0,
+        average_goals_against: 0.0
       }
     }
     assert_equal expectation_2012, stat_tracker.seasonal_summary("2")["20122013"]
