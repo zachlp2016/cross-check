@@ -166,7 +166,7 @@ module LeagueStatistics
     return decipher_name(highest_scoring_home[0])
   end
 
-  def win_accumulation
+  def wins_accumulation
     win_accumulator = goals_per_team
     group_by_team.each do |team|
       team[1].each do |game|
@@ -176,9 +176,12 @@ module LeagueStatistics
       end
     end
     return win_accumulator
-    binding.pry
   end
 
-  # def winningest_team
-  # end
+  def winningest_team
+    best_win_percentage = wins_accumulation.max_by do |team|
+      (team[1].to_f / games_accumulation[team[0].to_s].to_f).round(2)
+    end
+    return decipher_name(best_win_percentage[0])
+  end
 end

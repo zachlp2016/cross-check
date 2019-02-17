@@ -65,7 +65,7 @@ class LeagueStatisticsTest < Minitest::Test
       assert_equal hash, @test_stat_tracker.goals_accumulation
   end
 
-  def test_method_game_count_works
+  def test_method_games_accumulation
     hash = {
       "3"=>5,
       "6"=>9,
@@ -83,9 +83,6 @@ class LeagueStatisticsTest < Minitest::Test
   def test_method_worst_defense_works
     assert_equal "Rangers", @test_stat_tracker.worst_defense
   end
-
-  # Name of the team with the highest average score per
-  # game across all seasons when they are away.
 
   def test_away_team_games_accumulation_works
     hash = {"3"=>3,
@@ -154,11 +151,14 @@ class LeagueStatisticsTest < Minitest::Test
           "16"=>2
         }
 
-    assert_equal hash, @test_stat_tracker.win_accumulation
+    assert_equal hash, @test_stat_tracker.wins_accumulation
   end
 
   def test_method_for_winningest_team
-    skip
     assert_equal "Bruins", @test_stat_tracker.winningest_team
+  end
+
+  def test_method_best_fans
+    assert_equal "Bruins", @test_stat_tracker.best_fans
   end
 end
