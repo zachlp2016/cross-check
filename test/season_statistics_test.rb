@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/stat_tracker'
 require 'pry'
 
-class TeamStatisticsTest < Minitest::Test
+class SeasonStatisticsTest < Minitest::Test
 
   def setup
     @game_path = './test/data/game_test.csv'
@@ -22,6 +22,6 @@ class TeamStatisticsTest < Minitest::Test
   end
 
   def test_getting_least_accurate_team
-    assert_equal "Canadiens", @stat_tracker.most_accurate_team("20122013")
+    assert_equal "Canadiens", @stat_tracker.least_accurate_team("20122013")
   end
 end
