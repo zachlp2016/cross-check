@@ -20,4 +20,8 @@ class TeamStatisticsTest < Minitest::Test
   def test_getting_most_accurate_team
     assert_equal "Penguins", @stat_tracker.most_accurate_team("20122013")
   end
+
+  def test_getting_least_accurate_team
+    assert_equal "Canadiens", @stat_tracker.most_accurate_team("20122013")
+  end
 end
