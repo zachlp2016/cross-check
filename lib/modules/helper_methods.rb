@@ -5,6 +5,14 @@ module HelperMethods
     end
   end
 
+  def get_team_name(team_id)
+    teams.each do |team|
+      if team_id == team.team_id
+        return team.team_name
+      end
+    end
+  end
+
   def get_team_stats_for_each_game(team_id)
     @game_teams.select {|game| game.team_id == team_id}
   end
