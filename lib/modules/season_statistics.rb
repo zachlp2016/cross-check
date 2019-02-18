@@ -18,4 +18,10 @@ module SeasonStatistics
         wins: 0
       }
     }
+    season_games.each do |game|
+     if game.won == true
+       game_results[game.head_coach][:wins] += 1
+     end
+     game_results[game.head_coach][:total] += 1
+    end
 end
