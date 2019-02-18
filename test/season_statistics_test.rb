@@ -28,7 +28,12 @@ class SeasonStatisticsTest < Minitest::Test
   def test_getting_most_hits
     assert_equal "Bruins", @stat_tracker.most_hits("20122013")
   end
+
   def test_getting_least_hits
     assert_equal "Canucks", @stat_tracker.least_hits("20122013")
+  end
+
+  def test_getting_power_play_goal_percentage
+    assert_equal 0.22, @stat_tracker.power_play_goal_percentage("20122013")
   end
 end
