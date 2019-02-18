@@ -18,10 +18,24 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_getting_most_accurate_team
+    skip
     assert_equal "Penguins", @stat_tracker.most_accurate_team("20122013")
   end
 
   def test_getting_least_accurate_team
+    skip
     assert_equal "Canadiens", @stat_tracker.least_accurate_team("20122013")
   end
+
+  def test_worst_coach
+   assert_equal "Jon Cooper", @stat_tracker.worst_coach("20132014")
+   assert_equal "Paul Maurice", @stat_tracker.worst_coach("20142015")
+   assert_equal "Randy Carlyle", @stat_tracker.worst_coach("20172018")
+ end
+
+ def test_winningest_coach
+   assert_equal "Darryl Sutter", @stat_tracker.winningest_coach("20132014")
+   assert_equal "Joel Quenneville", @stat_tracker.winningest_coach("20142015")
+   assert_equal "Barry Trotz", @stat_tracker.winningest_coach("20172018")
+ end
 end
