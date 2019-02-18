@@ -172,11 +172,11 @@ class LeagueStatisticsTest < Minitest::Test
 
   def test_method_away_wins_accumulation_tallies
     hash =  {
-            "3"=>1,
-            "6"=>5,
+            "3"=>0,
+            "6"=>3,
             "5"=>0,
-            "17"=>2,
-            "16"=>2
+            "17"=>1,
+            "16"=>0
           }
 
       assert_equal hash, @test_stat_tracker.away_wins_accumulation

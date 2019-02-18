@@ -195,13 +195,13 @@ module LeagueStatistics
     return home_win_accumulator
   end
 
-  def home_wins_accumulation
-    home_win_accumulator = goals_per_team
+  def away_wins_accumulation
+    away_win_accumulator = goals_per_team
     group_by_game.each_value do |game_value|
-      if game_value[1].won == true
-            home_win_accumulator[game_value[1].team_id] += 1
+      if game_value[0].won == true
+            away_win_accumulator[game_value[0].team_id] += 1
       end
     end
-    return home_win_accumulator
+    return away_win_accumulator
   end
 end
