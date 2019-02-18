@@ -5,6 +5,14 @@ module HelperMethods
     end
   end
 
+  def get_team_name(team_id)
+    teams.each do |team|
+      if team_id == team.team_id
+        return team.team_name
+      end
+    end
+  end
+
   def get_team_stats_for_each_game(team_id)
     @game_teams.select {|game| game.team_id == team_id}
   end
@@ -45,5 +53,20 @@ module HelperMethods
       outcomes_against[opponent][outcome] += 1
     end
     return outcomes_against
+  end
+
+  def get_team_stats_for_single_season(season_id)
+    season_games = @game_teams.select{|game| season_id[0..3] == game.game_id[0..3]}
+    team_stats = Hash.new{|team_stats,team_id|
+      team_stats[team_id] = {
+        goals: 0,
+        shots: 0
+      }
+    }
+    season_games.each do |game|
+      team_stats[game.team_id][:goals] += game.goals
+      team_stats[game.team_id][:shots] += game.shots
+    end
+    return team_stats
   end
 end
