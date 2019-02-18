@@ -204,4 +204,8 @@ module LeagueStatistics
     end
     return away_win_accumulator
   end
+
+  def best_fans
+    best_home_win_percentage
+  end
 end

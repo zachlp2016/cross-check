@@ -183,7 +183,6 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_best_fans
-    skip
     assert_equal "Bruins", @test_stat_tracker.best_fans
   end
 end
