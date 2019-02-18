@@ -24,4 +24,10 @@ module SeasonStatistics
      end
      game_results[game.head_coach][:total] += 1
     end
+
+    the_coach = game_results.min_by do |game, coach|
+      (coach[:wins].to_f / coach[:total].to_f).round(2)
+    end
+    the_coach[0]
+  end
 end

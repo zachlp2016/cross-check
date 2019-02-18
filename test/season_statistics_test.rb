@@ -8,7 +8,7 @@ class SeasonStatisticsTest < Minitest::Test
   def setup
     @game_path = './test/data/game_test.csv'
     @team_path = './data/team_info.csv'
-    @game_teams_path = './test/data/game_teams_stats_.csv'
+    @game_teams_path = './test/data/game_teams_stats_test.csv'
     @locations = {
       games: @game_path,
       teams: @team_path,
@@ -28,7 +28,7 @@ class SeasonStatisticsTest < Minitest::Test
   end
 
   def test_worst_coach
-   assert_equal "Jack Capuano", @stat_tracker.worst_coach("20132014")
-   assert_equal "Craig MacTavish", @stat_tracker.worst_coach("20142015")
+   assert_equal "Jon Cooper", @stat_tracker.worst_coach("20132014")
+   assert_equal "Paul Maurice", @stat_tracker.worst_coach("20142015")
  end
 end
