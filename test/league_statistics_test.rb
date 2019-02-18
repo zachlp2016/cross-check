@@ -158,7 +158,32 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal "Bruins", @test_stat_tracker.winningest_team
   end
 
+  def test_method_home_wins_accumulation_tallies
+    hash =  {
+            "3"=>1,
+            "6"=>5,
+            "5"=>0,
+            "17"=>2,
+            "16"=>2
+          }
+
+      assert_equal hash, @test_stat_tracker.home_wins_accumulation
+  end
+
+  def test_method_away_wins_accumulation_tallies
+    hash =  {
+            "3"=>1,
+            "6"=>5,
+            "5"=>0,
+            "17"=>2,
+            "16"=>2
+          }
+
+      assert_equal hash, @test_stat_tracker.away_wins_accumulation
+  end
+
   def test_method_best_fans
+    skip
     assert_equal "Bruins", @test_stat_tracker.best_fans
   end
 end
