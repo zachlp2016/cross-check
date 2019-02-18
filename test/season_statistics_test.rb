@@ -24,4 +24,9 @@ class SeasonStatisticsTest < Minitest::Test
   def test_getting_least_accurate_team
     assert_equal "Canadiens", @stat_tracker.least_accurate_team("20122013")
   end
+
+  def test_worst_coach
+   assert_equal "Peter Laviolette", @stat_tracker.worst_coach("20132014")
+   assert_equal "Craig MacTavish", @stat_tracker.worst_coach("20142015")
+ end
 end
