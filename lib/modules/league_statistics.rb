@@ -39,7 +39,7 @@ module LeagueStatistics
   def decipher_name(team_id)
     teams.each do |team|
       if team_id == team.team_id
-        return team.short_name
+        return team.team_name
       end
     end
   end
@@ -82,6 +82,32 @@ module LeagueStatistics
     return games_accumulation
   end
 
+  def visitor_games_accumulation
+    games_accumulation = {}
+      group_by_game.each_value do |game_value|
+        if games_accumulation[game_value[0].team_id] == nil
+          games_accumulation[game_value[0].team_id] = 0
+        end
+      end
+      group_by_game.each_value do |game_value|
+        games_accumulation[game_value[0].team_id] += 1
+      end
+    return games_accumulation
+  end
+
+  def home_games_accumulation
+    games_accumulation = {}
+      group_by_game.each_value do |game_value|
+        if games_accumulation[game_value[1].team_id] == nil
+          games_accumulation[game_value[1].team_id] = 0
+        end
+      end
+      group_by_game.each_value do |game_value|
+        games_accumulation[game_value[1].team_id] += 1
+      end
+    return games_accumulation
+  end
+
   def best_defense
     best_defense = games_accumulation.min_by do |game|
       (goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
@@ -96,30 +122,90 @@ module LeagueStatistics
     decipher_name(worst_defense[0])
   end
 
+  def visitor_goals_accumulation
+    visitor_goals_accumulation = goals_per_team
+    group_by_game.each_value do |game_value|
+            visitor_goals_accumulation[game_value[0].team_id] += game_value[0].goals
+    end
+    return visitor_goals_accumulation
+  end
 
+  def home_goals_accumulation
+    home_goals_accumulation = goals_per_team
+    group_by_game.each_value do |game_value|
+            home_goals_accumulation[game_value[1].team_id] += game_value[1].goals
+    end
+    return home_goals_accumulation
+  end
 
+  def highest_scoring_visitor
+    highest_scoring_visitor = visitor_games_accumulation.max_by do |game|
+        (visitor_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
+    end
+    return decipher_name(highest_scoring_visitor[0])
+  end
 
+  def highest_scoring_home_team
+    highest_scoring_home = home_games_accumulation.max_by do |game|
+        (home_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
+      end
+    return decipher_name(highest_scoring_home[0])
+  end
+
+  def lowest_scoring_visitor
+    highest_scoring_visitor = visitor_games_accumulation.min_by do |game|
+        (visitor_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
+    end
+    return decipher_name(highest_scoring_visitor[0])
+  end
+
+  def lowest_scoring_home_team
+    highest_scoring_home = home_games_accumulation.min_by do |game|
+        (home_goals_accumulation[game[0]].to_f / game[1].to_f).round(2)
+      end
+    return decipher_name(highest_scoring_home[0])
+  end
+
+  def wins_accumulation
+    win_accumulator = goals_per_team
+    group_by_team.each do |team|
+      team[1].each do |game|
+        if game.won == true
+        win_accumulator[team[0]] += 1
+        end
+      end
+    end
+    return win_accumulator
+  end
+
+  def winningest_team
+    best_win_percentage = wins_accumulation.max_by do |team|
+      (team[1].to_f / games_accumulation[team[0].to_s].to_f).round(2)
+    end
+    return decipher_name(best_win_percentage[0])
+  end
+
+  def home_wins_accumulation
+    home_win_accumulator = goals_per_team
+    group_by_game.each_value do |game_value|
+      if game_value[1].won == true
+            home_win_accumulator[game_value[1].team_id] += 1
+      end
+    end
+    return home_win_accumulator
+  end
+
+  def away_wins_accumulation
+    away_win_accumulator = goals_per_team
+    group_by_game.each_value do |game_value|
+      if game_value[0].won == true
+            away_win_accumulator[game_value[0].team_id] += 1
+      end
+    end
+    return away_win_accumulator
+  end
+
+  def best_fans
+    best_home_win_percentage
+  end
 end
-
-# def best_defense
-#   goals_allowed = {}
-#   group_by_game.each do |game_hash|
-#     if game_hash[1][0].home_or_away == "home" || game_hash[1][0].home_or_away == "away"
-#       if goals_allowed[game_hash[1][0].team_id] == nil
-#         goals_allowed[game_hash[1][0].team_id] = game_hash[1][1].goals
-#       elsif goals_allowed[game_hash[1][0].team_id] != nil
-#         goals_allowed[game_hash[1][0].team_id] += game_hash[1][1].goals
-#       end
-#     elsif game_hash[1][1].home_or_away == "away" || game_hash[1][1].home_or_away == "home"
-#       if goals_allowed[game_hash[1][1].team_id] == nil
-#         goals_allowed[game_hash[1][1].team_id] = game_hash[1][0].goals
-#       elsif goals_allowed[game_hash[1][1].team_id] != nil
-#         goals_allowed[game_hash[1][1].team_id] += game_hash[1][0].goals
-#       end
-#     end
-#   end
-#   binding.pry
-# end
-#
-# "2012030221","3","away",FALSE,"OT","John Tortorella",2,35,44,8,3,0,44.8,17,7
-# "2012030221","6","home",TRUE,"OT","Claude Julien",4,48,51,6,4,1,55.2,4,5

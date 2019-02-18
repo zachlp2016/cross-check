@@ -31,18 +31,16 @@ class LeagueStatisticsTest < Minitest::Test
       @test_stat_tracker = StatTracker.from_csv(@test_data)
   end
 
-
-
   def test_method_count_of_teams
     assert_equal 33, @test_stat_tracker.count_of_teams
   end
 
   def test_method_best_offense_works
-    assert_equal "Boston", @test_stat_tracker.best_offense
+    assert_equal "Bruins", @test_stat_tracker.best_offense
   end
 
   def test_method_worst_offense_works
-    assert_equal "Pittsburgh", @test_stat_tracker.worst_offense
+    assert_equal "Penguins", @test_stat_tracker.worst_offense
   end
 
   def test_method_goals_per_team
@@ -67,7 +65,7 @@ class LeagueStatisticsTest < Minitest::Test
       assert_equal hash, @test_stat_tracker.goals_accumulation
   end
 
-  def test_method_game_count_works
+  def test_method_games_accumulation
     hash = {
       "3"=>5,
       "6"=>9,
@@ -79,10 +77,112 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_best_defense_works
-    assert_equal "Boston", @test_stat_tracker.best_defense
+    assert_equal "Bruins", @test_stat_tracker.best_defense
   end
 
   def test_method_worst_defense_works
-    assert_equal "NY Rangers", @test_stat_tracker.worst_defense
+    assert_equal "Rangers", @test_stat_tracker.worst_defense
+  end
+
+  def test_away_team_games_accumulation_works
+    hash = {"3"=>3,
+            "6"=>4,
+            "5"=>2,
+            "17"=>3,
+            "16"=>2
+          }
+    assert_equal hash, @test_stat_tracker.visitor_games_accumulation
+  end
+
+  def test_away_team_goals_accumulation_works
+
+    hash = {"3"=>3,
+            "6"=>23,
+            "5"=>1,
+            "17"=>6,
+            "16"=>1}
+
+    assert_equal hash, @test_stat_tracker.visitor_goals_accumulation
+  end
+
+  def test_home_team_games_accumulation_works
+    hash = {"6"=>5,
+            "3"=>2,
+            "5"=>2,
+            "16"=>3,
+            "17"=>2
+          }
+    assert_equal hash, @test_stat_tracker.home_games_accumulation
+  end
+
+  def test_home_team_goals_accumulation_works
+    hash = {"3"=>2,
+            "6"=>16,
+            "5"=>1,
+            "17"=>5,
+            "16"=>9
+          }
+
+    assert_equal hash, @test_stat_tracker.home_goals_accumulation
+  end
+
+  def test_away_team_highest_average_score
+    assert_equal "Bruins", @test_stat_tracker.highest_scoring_visitor
+  end
+
+  def test_home_team_highest_average_score
+    assert_equal "Bruins", @test_stat_tracker.highest_scoring_home_team
+  end
+
+  def test_lowest_scoring_visitor
+    assert_equal "Penguins", @test_stat_tracker.lowest_scoring_visitor
+  end
+
+  def test_lowest_scoring_home_team
+    assert_equal "Penguins", @test_stat_tracker.lowest_scoring_home_team
+  end
+
+  def test_method_win_accumulation_works
+  hash =  {
+          "3"=>1,
+          "6"=>8,
+          "5"=>0,
+          "17"=>3,
+          "16"=>2
+        }
+
+    assert_equal hash, @test_stat_tracker.wins_accumulation
+  end
+
+  def test_method_for_winningest_team
+    assert_equal "Bruins", @test_stat_tracker.winningest_team
+  end
+
+  def test_method_home_wins_accumulation_tallies
+    hash =  {
+            "3"=>1,
+            "6"=>5,
+            "5"=>0,
+            "17"=>2,
+            "16"=>2
+          }
+
+      assert_equal hash, @test_stat_tracker.home_wins_accumulation
+  end
+
+  def test_method_away_wins_accumulation_tallies
+    hash =  {
+            "3"=>0,
+            "6"=>3,
+            "5"=>0,
+            "17"=>1,
+            "16"=>0
+          }
+
+      assert_equal hash, @test_stat_tracker.away_wins_accumulation
+  end
+
+  def test_method_best_fans
+    assert_equal "Bruins", @test_stat_tracker.best_fans
   end
 end
