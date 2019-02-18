@@ -24,4 +24,11 @@ class SeasonStatisticsTest < Minitest::Test
   def test_getting_least_accurate_team
     assert_equal "Canadiens", @stat_tracker.least_accurate_team("20122013")
   end
+
+  def test_getting_most_hits
+    assert_equal "Bruins", @stat_tracker.most_hits("20122013")
+  end
+  def test_getting_least_hits
+    assert_equal "Canucks", @stat_tracker.least_hits("20122013")
+  end
 end
