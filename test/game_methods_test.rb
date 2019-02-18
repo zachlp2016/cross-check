@@ -33,7 +33,7 @@ skip
   end
 
   def test_home_and_away_games_won
-skip
+    skip
     assert_equal 4089 , @stat_tracker.total_home_games_won
     assert_equal  3352, @stat_tracker.total_away_games_won
   end
@@ -46,10 +46,11 @@ skip
   def test_percentage_home_and_away_wins
     skip
     assert_equal 0.55, @stat_tracker.percentage_home_wins
-    assert_equal 0.45, @stat_tracker.percentage_away_wins
+    assert_equal 0.45, @stat_tracker.percentage_visitor_wins
   end
 
   def test_count_of_games_by_season
+    skip
     expected = {
       "20122013"=>806,
       "20162017"=>1317,
@@ -58,7 +59,7 @@ skip
       "20132014"=>1323,
       "20172018"=>1355
     }
-    
+
     assert_equal expected, @stat_tracker.count_of_games_by_season
   end
 
@@ -68,7 +69,7 @@ skip
    end
 
    def test_average_goals_by_season
-     skip
+
      expected = {
        "20122013"=>5.4,
        "20162017"=>5.51,
@@ -77,7 +78,7 @@ skip
        "20132014"=>5.5,
        "20172018"=>5.94
      }
-     assert_equal excpected, @stat_tracker.average_goals_by_season
+     assert_equal expected, @stat_tracker.average_goals_by_season
    end
 
 end
