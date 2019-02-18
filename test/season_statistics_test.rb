@@ -31,4 +31,9 @@ class SeasonStatisticsTest < Minitest::Test
    assert_equal "Jon Cooper", @stat_tracker.worst_coach("20132014")
    assert_equal "Paul Maurice", @stat_tracker.worst_coach("20142015")
  end
+
+ def test_winningest_coach
+   assert_equal "s", @stat_tracker.winningest_team("20132014")
+   assert_equal "s", @stat_tracker.winningest_team("20142015")
+ end
 end
