@@ -1,4 +1,3 @@
-require './lib/stat_tracker'
 require 'pry'
 module GameMethods
 
@@ -72,28 +71,17 @@ module GameMethods
   end
 
   def average_goals_by_season
-
-    # total_season_goals = @games.sum do |game|
-    #   game.home_goals + game.away_goals
-    # end.to_f
     output_by_average_goals = {}
 
-    seasons.each do |season, game|
-      output_by_average_goals[season] = ((game[0].home_goals+game[0].away_goals)/game.count).round(2)
+    seasons.each do |season, season_game|
+      season_goals = season_game.sum do |game|
+        game.home_goals + game.away_goals
+      end.to_f
+      output_by_average_goals[season] = (season_goals/season_game.count).round(2)
     end
     output_by_average_goals
   end
 
-#   def average_goals_by_season()
-#     total_season_goals = @games.map do |game|
-#       if game.season == season_years
-#         game.home_goals + game.away_goals
-#       end
-#     end.compact.sum
-# binding.pry
-#     (total_season_goals.to_f/total_count_of_games_by_season(season_years)).round(2)
-#
-#   end
 
   def seasons
     @games.group_by do |season|
