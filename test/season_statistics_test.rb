@@ -75,4 +75,28 @@ class SeasonStatisticsTest < Minitest::Test
   def test_biggest_surprise
     assert_equal "Rangers", @stat_tracker_biggest_bust.biggest_surprise("20122013")
   end
+  
+  def test_getting_most_hits
+    assert_equal "Bruins", @stat_tracker.most_hits("20122013")
+  end
+
+  def test_getting_least_hits
+    assert_equal "Canucks", @stat_tracker.least_hits("20122013")
+  end
+
+  def test_getting_power_play_goal_percentage
+    assert_equal 0.22, @stat_tracker.power_play_goal_percentage("20122013")
+  end
+
+  def test_worst_coach
+    assert_equal "Jon Cooper", @stat_tracker.worst_coach("20132014")
+    assert_equal "Paul Maurice", @stat_tracker.worst_coach("20142015")
+    assert_equal "Randy Carlyle", @stat_tracker.worst_coach("20172018")
+  end
+
+  def test_winningest_coach
+    assert_equal "Darryl Sutter", @stat_tracker.winningest_coach("20132014")
+    assert_equal "Joel Quenneville", @stat_tracker.winningest_coach("20142015")
+    assert_equal "Barry Trotz", @stat_tracker.winningest_coach("20172018")
+  end
 end

@@ -1,3 +1,4 @@
+require 'pry'
 module GameMethods
 
   def highest_total_score
@@ -16,9 +17,10 @@ module GameMethods
 
   def biggest_blowout
     difference_in_score = @games.max_by do |game|
-      game.away_goals - game.home_goals
+      (game.home_goals - game.away_goals).abs #abs returns absolute value so negitve numbers become postive
     end
-    difference_in_score.away_goals - difference_in_score.home_goals
+
+    (difference_in_score.home_goals - difference_in_score.away_goals).abs
   end
 
   def percentage_home_wins
@@ -26,7 +28,7 @@ module GameMethods
     return home_percentage.round(2)
   end
 
-  def percentage_away_wins
+  def percentage_visitor_wins
     away_percentage =  total_away_games_won/total_games
     return away_percentage.round(2)
   end
@@ -53,8 +55,12 @@ module GameMethods
     total_home_games_won + total_away_games_won.to_f
   end
 
-  def total_count_of_games_by_season(season)
-    seasons[season].count
+  def count_of_games_by_season
+    output_by_game = {}
+    seasons.each do |season, game|
+      output_by_game[season] = game.count
+    end
+    output_by_game
   end
 
   def average_goals_per_game
@@ -64,15 +70,18 @@ module GameMethods
     (total_goals.to_f/total_games).round(2)
   end
 
-  def average_goals_by_season(season_years)
-    total_season_goals = @games.map do |game|
-      if game.season == season_years
-      game.home_goals + game.away_goals
-      end
-    end.compact.sum
+  def average_goals_by_season
+    output_by_average_goals = {}
 
-    (total_season_goals.to_f/total_count_of_games_by_season(season_years)).round(2)
+    seasons.each do |season, season_game|
+      season_goals = season_game.sum do |game|
+        game.home_goals + game.away_goals
+      end.to_f
+      output_by_average_goals[season] = (season_goals/season_game.count).round(2)
+    end
+    output_by_average_goals
   end
+
 
   def seasons
     @games.group_by do |season|
