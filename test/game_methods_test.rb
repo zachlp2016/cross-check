@@ -18,51 +18,66 @@ class GameMethodsTest < Minitest::Test
   end
 
   def test_highest_total_score
+
     assert_equal 13, @stat_tracker.highest_total_score
   end
 
   def test_lowest_total_score
+
     assert_equal 1, @stat_tracker.lowest_total_score
   end
 
   def test_biggest_blowout
-    assert_equal 5, @stat_tracker.biggest_blowout
+
+    assert_equal 7, @stat_tracker.biggest_blowout
   end
 
   def test_home_and_away_games_won
+
     assert_equal 299 , @stat_tracker.total_home_games_won
     assert_equal  231, @stat_tracker.total_away_games_won
   end
 
   def test_total_games_played
-    assert_equal 530, @stat_tracker.total_games
+
+    assert_equal 530.0, @stat_tracker.total_games
   end
 
   def test_percentage_home_and_away_wins
+
     assert_equal 0.56, @stat_tracker.percentage_home_wins
-    assert_equal 0.44, @stat_tracker.percentage_away_wins
+    assert_equal 0.44, @stat_tracker.percentage_visitor_wins
   end
 
   def test_count_of_games_by_season
-    assert_equal 86, @stat_tracker.total_count_of_games_by_season("20122013")
-    assert_equal 93, @stat_tracker.total_count_of_games_by_season("20132014")
-    assert_equal 89, @stat_tracker.total_count_of_games_by_season("20142015")
-    assert_equal 91, @stat_tracker.total_count_of_games_by_season("20152016")
-    assert_equal 87, @stat_tracker.total_count_of_games_by_season("20162017")
-    assert_equal 84, @stat_tracker.total_count_of_games_by_season("20172018")
+    expected = {
+      "20122013"=>86,
+      "20162017"=>87,
+      "20142015"=>89,
+      "20152016"=>91,
+      "20132014"=>93,
+      "20172018"=>84
+    }
+
+    assert_equal expected, @stat_tracker.count_of_games_by_season
   end
 
   def test_average_goals_per_game
-     assert_equal 5.33, @stat_tracker.average_goals_per_game
-   end
 
-   def test_average_goals_by_season
-     assert_equal 5.02, @stat_tracker.average_goals_by_season("20122013")
-     assert_equal 5.59, @stat_tracker.average_goals_by_season("20132014")
-     assert_equal 5.03, @stat_tracker.average_goals_by_season("20142015")
-     assert_equal 5.25, @stat_tracker.average_goals_by_season("20152016")
-     assert_equal 5.16, @stat_tracker.average_goals_by_season("20162017")
-     assert_equal 5.9, @stat_tracker.average_goals_by_season("20172018")
-   end
+    assert_equal 5.33, @stat_tracker.average_goals_per_game
+  end
+
+  def test_average_goals_by_season
+    expected = {
+      "20122013"=>5.02,
+      "20162017"=>5.16,
+      "20142015"=>5.03,
+      "20152016"=>5.25,
+      "20132014"=>5.59,
+      "20172018"=>5.9
+    }
+
+    assert_equal expected, @stat_tracker.average_goals_by_season
+  end
 
 end
