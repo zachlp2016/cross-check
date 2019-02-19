@@ -22,7 +22,6 @@ module HelperMethods
       game.home_team_id == team_id ||
       game.away_team_id == team_id
     end
-
   end
 
   def team_win_loss_by_season(team_id)
@@ -58,10 +57,10 @@ module HelperMethods
   def get_team_stats_for_single_season(season_id)
     season_games = @game_teams.select{|game| season_id[0..3] == game.game_id[0..3]}
     team_stats = Hash.new{|team_stats,team_id|
-
       team_stats[team_id] = Hash.new{|team_id,stat|
         team_id[stat] = 0
       }
+    }
     season_games.each do |game|
       [:goals, :shots, :hits, :pim,
        :power_play_opportunities, :power_play_goals,
@@ -71,6 +70,7 @@ module HelperMethods
     end
     return team_stats
   end
+
   def game_results_by_coach(season)
     season_games = @game_teams.select{|game| season[0..3] == game.game_id[0..3]}
     game_results = Hash.new{|results, coach|

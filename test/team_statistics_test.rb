@@ -4,7 +4,6 @@ require './lib/stat_tracker'
 require 'pry'
 
 class TeamStatisticsTest < Minitest::Test
-
   def setup
     @game_path = './test/data/game_test.csv'
     @team_path = './data/team_info.csv'
@@ -121,16 +120,3 @@ class TeamStatisticsTest < Minitest::Test
     assert_equal expectation_2013, stat_tracker.seasonal_summary("2")["20132014"]
   end
 end
-
-# team_info                 A hash with key/value pairs for each of the attributes of a team.
-# best_season               Season with the highest win percentage for a team.
-# worst_season              Season with the lowest win percentage for a team.
-# average_win_percentage    Average win percentage of all games for a team.
-# most_goals_scored         Highest number of goals a particular team has scored in a single game.
-# fewest_goals_scored       Lowest numer of goals a particular team has scored in a single game.
-# favorite_opponent         Name of the opponent that has the lowest win percentage against the given team.
-# rival                     Name of the opponent that has the highest win percentage against the given team.
-# biggest_team_blowout      Biggest difference between team goals and opponent goals for a win for the given team.
-# worst_loss                Biggest difference between team goals and opponent goals for a loss for the given team.
-# head_to_head              Record (as a hash - win/loss) against a specific opponent
-# seasonal_summary          For each season that the team has played, a hash that has two keys (:preseason, and :regular_season), that each point to a hash with the following keys: :win_percentage, :total_goals_scored, :total_goals_against, :average_goals_scored, :average_goals_against

@@ -4,7 +4,6 @@ require './lib/stat_tracker'
 require 'pry'
 
 class StatTrackerTest < Minitest::Test
-
   def setup
     @empty_stat_tracker = StatTracker.new
 

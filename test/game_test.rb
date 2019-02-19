@@ -4,7 +4,6 @@ require './lib/stat_tracker'
 require 'pry'
 
 class GameTest < Minitest::Test
-
   def setup
     @game_data = {
           "game_id" => "2012030221",

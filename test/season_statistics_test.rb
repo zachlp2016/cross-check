@@ -4,7 +4,6 @@ require './lib/stat_tracker'
 require 'pry'
 
 class SeasonStatisticsTest < Minitest::Test
-
   def setup
     @game_path = './test/data/game_test.csv'
     @team_path = './data/team_info.csv'
@@ -75,7 +74,7 @@ class SeasonStatisticsTest < Minitest::Test
   def test_biggest_surprise
     assert_equal "Rangers", @stat_tracker_biggest_bust.biggest_surprise("20122013")
   end
-  
+
   def test_getting_most_hits
     assert_equal "Bruins", @stat_tracker.most_hits("20122013")
   end

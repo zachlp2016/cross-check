@@ -1,6 +1,4 @@
-require 'pry'
 module GameMethods
-
   def highest_total_score
     total_score = @games.max_by do |game|
       game.away_goals + game.home_goals
@@ -19,7 +17,6 @@ module GameMethods
     difference_in_score = @games.max_by do |game|
       (game.home_goals - game.away_goals).abs #abs returns absolute value so negitve numbers become postive
     end
-
     (difference_in_score.home_goals - difference_in_score.away_goals).abs
   end
 
@@ -72,7 +69,6 @@ module GameMethods
 
   def average_goals_by_season
     output_by_average_goals = {}
-
     seasons.each do |season, season_game|
       season_goals = season_game.sum do |game|
         game.home_goals + game.away_goals
@@ -81,7 +77,6 @@ module GameMethods
     end
     output_by_average_goals
   end
-
 
   def seasons
     @games.group_by do |season|

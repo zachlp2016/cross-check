@@ -4,9 +4,7 @@ require './lib/stat_tracker'
 require 'pry'
 
 class LeagueStatisticsTest < Minitest::Test
-
   def setup
-
       @game_path = './test/data/game_test.csv'
       @team_path = './data/team_info.csv'
       @game_team_path = './test/data/game_teams_stats.csv'
@@ -19,8 +17,6 @@ class LeagueStatisticsTest < Minitest::Test
         teams: @team_path,
         game_teams: @game_team_path
       }
-
-      # @stat_tracker = StatTracker.from_csv(@locations)
 
       @test_data = {
         games: @game_test_path,
@@ -95,7 +91,6 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_away_team_goals_accumulation_works
-
     hash = {"3"=>3,
             "6"=>23,
             "5"=>1,
