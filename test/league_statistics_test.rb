@@ -183,6 +183,10 @@ class LeagueStatisticsTest < Minitest::Test
   end
 
   def test_method_best_fans
-    assert_equal "Bruins", @test_stat_tracker.best_fans
+    assert_equal "Red Wings", @test_stat_tracker.best_fans
+  end
+
+  def test_method_worst_fans
+    assert_equal [], @test_stat_tracker.worst_fans
   end
 end
