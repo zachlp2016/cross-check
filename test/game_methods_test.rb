@@ -4,7 +4,6 @@ require './lib/stat_tracker'
 require 'pry'
 
 class GameMethodsTest < Minitest::Test
-
   def setup
     @game_path = './test/data/game_test.csv'
     @team_path = './data/team_info.csv'
@@ -18,33 +17,27 @@ class GameMethodsTest < Minitest::Test
   end
 
   def test_highest_total_score
-
     assert_equal 13, @stat_tracker.highest_total_score
   end
 
   def test_lowest_total_score
-
     assert_equal 1, @stat_tracker.lowest_total_score
   end
 
   def test_biggest_blowout
-
     assert_equal 7, @stat_tracker.biggest_blowout
   end
 
   def test_home_and_away_games_won
-
     assert_equal 299 , @stat_tracker.total_home_games_won
     assert_equal  231, @stat_tracker.total_away_games_won
   end
 
   def test_total_games_played
-
     assert_equal 530.0, @stat_tracker.total_games
   end
 
   def test_percentage_home_and_away_wins
-
     assert_equal 0.56, @stat_tracker.percentage_home_wins
     assert_equal 0.44, @stat_tracker.percentage_visitor_wins
   end
@@ -63,7 +56,6 @@ class GameMethodsTest < Minitest::Test
   end
 
   def test_average_goals_per_game
-
     assert_equal 5.33, @stat_tracker.average_goals_per_game
   end
 

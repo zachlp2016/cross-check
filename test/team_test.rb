@@ -5,13 +5,6 @@ require 'pry'
 
 class TeamTest < Minitest::Test
   def setup
-    # @files = {
-    #   games: './data/game_test.csv',
-    #   teams: './data/team_info.csv',
-    #   game_teams: './data/game_teams_stats_test.csv'
-    # }
-    # @stat_tracker = StatTracker.from_csv(@files)
-
     @team = Team.new({
       "team_id" => "1",
       "franchiseId" => "23",

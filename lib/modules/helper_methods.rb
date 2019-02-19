@@ -22,7 +22,6 @@ module HelperMethods
       game.home_team_id == team_id ||
       game.away_team_id == team_id
     end
-
   end
 
   def team_win_loss_by_season(team_id)
@@ -71,7 +70,7 @@ module HelperMethods
     end
     return team_stats
   end
-  
+
   def game_results_by_coach(season)
     season_games = @game_teams.select{|game| season[0..3] == game.game_id[0..3]}
     game_results = Hash.new{|results, coach|
