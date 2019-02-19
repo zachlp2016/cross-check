@@ -29,9 +29,7 @@ module SeasonStatistics
   end
 
   def preseason_win_perc(season)
-    preseason_win = Hash.new{|team, preseason_win|
-      preseason_win[team] = 0
-    }
+    preseason_win = {}
     season_win_accumulation(season).each do |team|
       preseason_win[team[0]] = (team[1]["03"][:wins].to_f / team[1]["03"][:total].to_f).round(2)
     end
@@ -39,9 +37,7 @@ module SeasonStatistics
   end
 
   def regular_win_perc(season)
-    regular_season = Hash.new{|team, regular_season|
-      regular_season[team] = 0
-    }
+    regular_season = {}
     season_win_accumulation(season).each do |team|
       regular_season[team[0]] = (team[1]["02"][:wins].to_f / team[1]["02"][:total].to_f).round(2)
     end
