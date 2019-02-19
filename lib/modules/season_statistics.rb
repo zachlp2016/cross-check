@@ -70,11 +70,11 @@ module SeasonStatistics
 
 
   def biggest_bust(season)
-    biggest_bust = preseason_win_perc(season).min_by do |team|
+    biggest_bust = preseason_win_perc(season).max_by do |team|
       if team[1].to_f > regular_win_perc(season)[team[0]].to_f
-        team[1].to_f - regular_win_perc(season)[team[0]].to_f
+        (team[1].to_f - regular_win_perc(season)[team[0]].to_f).round(2)
       else
-        1.0
+        0.0
       end
     end
     return get_team_name(biggest_bust[0])
