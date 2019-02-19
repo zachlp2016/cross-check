@@ -206,6 +206,19 @@ module LeagueStatistics
   end
 
   def best_fans
-    best_home_win_percentage
+    best_fans = group_by_team.max_by do |team|
+      (home_wins_accumulation[team[0]].to_f / home_games_accumulation[team[0]]).to_f - (away_wins_accumulation[team[0]].to_f / visitor_games_accumulation[team[0]].to_f)
+    end
+    return decipher_name(best_fans[0])
+  end
+
+  def worst_fans
+    worst_fans = []
+    group_by_team.each do |team|
+      if  (home_wins_accumulation[team[0]].to_f / home_games_accumulation[team[0]].to_f) < (away_wins_accumulation[team[0]].to_f / visitor_games_accumulation[team[0]].to_f)
+        worst_fans << team[0]
+      end
+    end
+    return worst_fans
   end
 end

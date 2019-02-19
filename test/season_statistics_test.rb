@@ -43,41 +43,36 @@ class SeasonStatisticsTest < Minitest::Test
     assert_equal "Canadiens", @stat_tracker.least_accurate_team("20122013")
   end
 
-  # def test_season_win_accumulation_works
-  #   hash =  {"3"=>{"03"=>{:total=>5, :wins=>1},"02"=>{:total=>5, :wins=>4}},
-  #            "6"=>{"03"=>{:total=>7, :wins=>6},"02"=>{:total=>7, :wins=>2}},
-  #            "5"=>{"03"=>{:total=>2, :wins=>0},"02"=>{:total=>2, :wins=>1}}
-  #           }
-  #
-  #   assert_equal hash, @stat_tracker_biggest_bust.season_win_accumulation("20122013")
-  # end
-  #
-  # def test_preseason_win_perc_house_works
-  #   hash = {"3"=>0.2,
-  #           "6"=>0.86,
-  #           "5"=>0.0
-  #           }
-  #   assert_equal hash, @stat_tracker_biggest_bust.preseason_win_perc("20122013")
-  # end
-  #
-  # def test_regular_win_perc_hash_works
-  #   hash = {"3"=>0.8,
-  #           "6"=>0.29,
-  #           "5"=>0.5
-  #           }
-  #   assert_equal hash, @stat_tracker_biggest_bust.regular_win_perc("20122013")
-  # end
-  #
-  # def test_biggest_bust
-  #   assert_equal "Bruins", @stat_tracker_biggest_bust.biggest_bust("20122013")
-  # end
+  def test_season_win_accumulation_works
+    hash =  {"3"=>{"03"=>{:total=>5, :wins=>1},"02"=>{:total=>5, :wins=>4}},
+             "6"=>{"03"=>{:total=>7, :wins=>6},"02"=>{:total=>7, :wins=>2}},
+             "5"=>{"03"=>{:total=>2, :wins=>0},"02"=>{:total=>2, :wins=>1}}
+            }
 
-  def test_biggest_surprise
-    assert_equal "Penguins", @stat_tracker_large_path.biggest_surprise("20152016")
+    assert_equal hash, @stat_tracker_biggest_bust.season_win_accumulation("20122013")
   end
 
-  # def test_biggest_surprise
-  #   skip
-  #   assert_equal "Penguins", @stat_tracker_biggest_bust.biggest_surprise("20122013")
-  # end
+  def test_preseason_win_perc_house_works
+    hash = {"3"=>0.2,
+            "6"=>0.86,
+            "5"=>0.0
+            }
+    assert_equal hash, @stat_tracker_biggest_bust.preseason_win_perc("20122013")
+  end
+
+  def test_regular_win_perc_hash_works
+    hash = {"3"=>0.8,
+            "6"=>0.29,
+            "5"=>0.5
+            }
+    assert_equal hash, @stat_tracker_biggest_bust.regular_win_perc("20122013")
+  end
+
+  def test_biggest_bust
+    assert_equal "Bruins", @stat_tracker_biggest_bust.biggest_bust("20122013")
+  end
+
+  def test_biggest_surprise
+    assert_equal "Rangers", @stat_tracker_biggest_bust.biggest_surprise("20122013")
+  end
 end

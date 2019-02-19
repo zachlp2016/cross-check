@@ -62,25 +62,32 @@ module SeasonStatistics
     season_win_accumulation(season).each do |team|
       regular_season[team[0]] = (team[1]["02"][:wins].to_f / team[1]["02"][:total].to_f).round(2)
     end
-    binding.pry
     return regular_season
   end
 
   #Name of the team with the biggest decrease between
   #preseason and regular season win percentage.
 
+
   def biggest_bust(season)
-    biggest_bust = preseason_win_perc(season).max_by do |team|
-      (team[1].to_f / regular_win_perc(season)[team[0]].to_f).round(2)
+    biggest_bust = preseason_win_perc(season).min_by do |team|
+      if team[1].to_f > regular_win_perc(season)[team[0]].to_f
+        team[1].to_f - regular_win_perc(season)[team[0]].to_f
+      else
+        1.0
+      end
     end
     return get_team_name(biggest_bust[0])
   end
 
   def biggest_surprise(season)
-    biggest_surprise = preseason_win_perc(season).min_by do |team|
-      (team[1].to_f / regular_win_perc(season)[team[0]].to_f).round(2)
+    biggest_surprise = preseason_win_perc(season).max_by do |team|
+      if team[1].to_f < regular_win_perc(season)[team[0]].to_f
+        (regular_win_perc(season)[team[0]].to_f - team[1].to_f).round(2)
+      else
+        0.0
+      end
     end
     return get_team_name(biggest_surprise[0])
   end
-
 end
