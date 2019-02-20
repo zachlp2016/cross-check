@@ -11,43 +11,11 @@ module SeasonStatistics
     return get_team_name(team)
   end
 
-  def season_win_accumulation(season)
-    game_results = Hash.new{|results, team|
-      results[team] = Hash.new{|team, season|
-        team[season] = {total: 0, wins: 0}
-      }
-    }
-    @game_teams.each do |game|
-      if game.game_id[0..3] == season[0..3]
-        if game.won == true
-          game_results[game.team_id][game.game_id[4..5]][:wins] += 1
-        end
-        game_results[game.team_id][game.game_id[4..5]][:total] += 1
-      end
-    end
-    return game_results
-  end
-
-  def preseason_win_perc(season)
-    preseason_win = {}
-    season_win_accumulation(season).each do |team|
-      preseason_win[team[0]] = (team[1]["03"][:wins].to_f / team[1]["03"][:total].to_f).round(2)
-    end
-    return preseason_win
-  end
-
-  def regular_win_perc(season)
-    regular_season = {}
-    season_win_accumulation(season).each do |team|
-      regular_season[team[0]] = (team[1]["02"][:wins].to_f / team[1]["02"][:total].to_f).round(2)
-    end
-    return regular_season
-  end
-
   def biggest_bust(season)
-    biggest_bust = preseason_win_perc(season).max_by do |team|
-      if team[1].to_f > regular_win_perc(season)[team[0]].to_f
-        (team[1].to_f - regular_win_perc(season)[team[0]].to_f).round(2)
+    biggest_bust = season_win_accumulation(season).max_by do |team_id,stats|
+      if stats.has_key?("03") && stats.has_key?("02")
+        stats["03"][:wins].to_f / stats["03"][:total] -
+        stats["02"][:wins].to_f / stats["02"][:total]
       else
         0.0
       end
@@ -56,16 +24,17 @@ module SeasonStatistics
   end
 
   def biggest_surprise(season)
-    biggest_surprise = preseason_win_perc(season).max_by do |team|
-      if team[1].to_f < regular_win_perc(season)[team[0]].to_f
-        (regular_win_perc(season)[team[0]].to_f - team[1].to_f).round(2)
+    biggest_surprise = season_win_accumulation(season).max_by do |team_id,stats|
+      if stats.has_key?("03") && stats.has_key?("02")
+        stats["02"][:wins].to_f / stats["02"][:total] -
+        stats["03"][:wins].to_f / stats["03"][:total]
       else
         0.0
       end
     end
     return get_team_name(biggest_surprise[0])
   end
-  
+
   def most_hits(season_id)
     team_stats = get_team_stats_for_single_season(season_id)
     team = team_stats.max_by{|team,stats| stats[:hits]}[0]
@@ -89,17 +58,17 @@ module SeasonStatistics
     end
     return (power_play_goals / goals).round(2)
   end
-  
+
   def worst_coach(season)
     the_coach = game_results_by_coach(season).min_by do |game, coach|
-      (coach[:wins].to_f / coach[:total].to_f).round(2)
+      coach[:wins].to_f / coach[:total].to_f
     end
     the_coach[0]
   end
 
   def winningest_coach(season)
     the_coach = game_results_by_coach(season).max_by do |game, coach|
-      (coach[:wins].to_f / coach[:total].to_f).round(2)
+      coach[:wins].to_f / coach[:total].to_f
     end
     the_coach[0]
   end

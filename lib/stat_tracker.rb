@@ -2,20 +2,20 @@ require 'csv'
 require_relative './data_structures/game'
 require_relative './data_structures/team'
 require_relative './data_structures/game_team'
-require_relative './modules/true_false_converter'
 require_relative './modules/team_statistics'
 require_relative './modules/league_statistics'
-require_relative './modules/game_methods'
+require_relative './modules/game_statistics'
 require_relative './modules/season_statistics'
 require_relative './modules/helper_methods'
+require_relative './modules/site_methods'
 
 class StatTracker
-  include TrueFalseConverter
   include HelperMethods
   include TeamStatistics
   include LeagueStatistics
-  include GameMethods
+  include GameStatistics
   include SeasonStatistics
+  include SiteMethods
 
   attr_reader :games,
               :teams,
@@ -30,7 +30,7 @@ class StatTracker
   end
 
   def self.from_csv(files)
-    options = {headers: true, converters: [:true_false_string_to_bool]}
+    options = {headers: true}
     StatTracker.new({
         games: CSV.open(files[:games], options),
         teams: CSV.open(files[:teams], options),

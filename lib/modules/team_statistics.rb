@@ -74,7 +74,7 @@ module TeamStatistics
   def head_to_head(team_id)
     output = {}
     get_outcomes_by_opponent(team_id).each do |opponent_id,outcome|
-      opponent_name = get_team(opponent_id).team_name
+      opponent_name = get_team_name(opponent_id)
       games_played = outcome[:win] + outcome[:loss].to_f
       output[opponent_name] = (outcome[:win] / games_played).round(2)
     end

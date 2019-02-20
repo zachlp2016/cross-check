@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>NHL Stat Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="interaction.js"></script>
+</head>
+<body>
+  <nav>Search by:
+    <ul id="buttons">
+      <li data-for="team">Team</li>
+      <li data-for="season">Season</li>
+      <li data-for="general">All games</li>
+    </ul>
+  </nav>
+  <section id="team">
+    <section class="sidebar">
+      <label for="team_id">Choose a team:</label><br>
+      <label for="team_info">Team Info:</label>
+      <label for="best_season">Best Season:</label>
+      <label for="worst_season">Worst Season:</label>
+      <label for="average_win_percentage">Average Win Percentage:</label>
+      <label for="most_goals_scored">Most Goals Scored:</label>
+      <label for="fewest_goals_scored">Fewest Goals Scored:</label>
+      <label for="favorite_opponent">Favorite Opponent:</label>
+      <label for="rival">Rival:</label>
+      <label for="biggest_team_blowout">Biggest Team Blowout:</label>
+      <label for="worst_loss">Worst Loss:</label>
+      <label for="head_to_head">Head to Head:</label>
+      <label for="seasonal_summary">Seasonal Summary:</label>
+    </section>
+    <section class="results">
+      <select id="team_id" name="team_id">
+        <option value="nil">---</option>
+      </select><br><br>
+      <input type="text" id="team_info" name="team_info" disabled><br>
+      <input type="text" id="best_season" name="best_season" disabled><br>
+      <input type="text" id="worst_season" name="worst_season" disabled><br>
+      <input type="text" id="average_win_percentage" name="average_win_percentage" disabled><br>
+      <input type="text" id="most_goals_scored" name="most_goals_scored" disabled><br>
+      <input type="text" id="fewest_goals_scored" name="fewest_goals_scored" disabled><br>
+      <input type="text" id="favorite_opponent" name="favorite_opponent" disabled><br>
+      <input type="text" id="rival" name="rival" disabled><br>
+      <input type="text" id="biggest_team_blowout" name="biggest_team_blowout" disabled><br>
+      <input type="text" id="worst_loss" name="worst_loss" disabled><br>
+      <input type="text" id="head_to_head" name="head_to_head" disabled><br>
+      <input type="text" id="seasonal_summary" name="seasonal_summary" disabled><br>
+    </section>
+  </section>
+  <section id="season">
+    <section class="sidebar">
+      <label for="season_id">Choose a season:</label><br>
+      <label for="biggest_bust">Biggest Bust:</label>
+      <label for="biggest_surprise">Biggest Surprise:</label>
+      <label for="winningest_coach">Winningest Coach:</label>
+      <label for="worst_coach">Worst Coach:</label>
+      <label for="most_accurate_team">Most Accurate Team:</label>
+      <label for="least_accurate_team">Least Accurate Team:</label>
+      <label for="most_hits">Most Hits:</label>
+      <label for="least_hits">Least Hits:</label>
+      <label for="power_play_goal_percentage">Power Play Goal Percentage:</label>
+    </section>
+    <section class="results">
+      <select id="season_id" name="season_id">
+        <option value="nil">---</option>
+      </select><br><br>
+      <input type="text" id="biggest_bust" name="biggest_bust" disabled><br>
+      <input type="text" id="biggest_surprise" name="biggest_surprise" disabled><br>
+      <input type="text" id="winningest_coach" name="winningest_coach" disabled><br>
+      <input type="text" id="worst_coach" name="worst_coach" disabled><br>
+      <input type="text" id="most_accurate_team" name="most_accurate_team" disabled><br>
+      <input type="text" id="least_accurate_team" name="least_accurate_team" disabled><br>
+      <input type="text" id="most_hits" name="most_hits" disabled><br>
+      <input type="text" id="least_hits" name="least_hits" disabled><br>
+      <input type="text" id="power_play_goal_percentage" name="power_play_goal_percentage" disabled><br>
+    </section>
+  </section>
+  <section id="general">
+    <section class="sidebar">
+      <label for="count_of_teams">Number of teams in data:</label>
+      <label for="best_offense">Best Offense:</label>
+      <label for="worst_offense">Worst Offense:</label>
+      <label for="best_defense">Best Defense:</label>
+      <label for="worst_defense">Worst Defense:</label>
+      <label for="highest_scoring_visitor">Highest Scoring Visitor:</label>
+      <label for="lowest_scoring_visitor">Lowest Scoring Visitor:</label>
+      <label for="highest_scoring_home_team">Highest Scoring Home Team:</label>
+      <label for="lowest_scoring_home_team">Lowest Scoring Home Team:</label>
+      <label for="winningest_team">Winningest Team:</label>
+      <label for="best_fans">Best Fans:</label>
+      <label for="worst_fans">Worst Fans:</label>
+      <label for="highest_total_score">Highest Total Score:</label>
+      <label for="lowest_total_score">Lowest Total Score:</label>
+      <label for="biggest_blowout">Biggest Blowout:</label>
+      <label for="percentage_home_wins">Percentage Home Wins:</label>
+      <label for="percentage_visitor_wins">Percentage Visitor Wins:</label>
+      <label for="count_of_games_by_season">Count of Games by Season:</label>
+      <label for="average_goals_per_game">Average Goals per Game overall:</label>
+      <label for="average_goals_by_season">Average Goals per Game by Season:</label>
+    </section>
+    <section class="results">
+      <input type="text" id="count_of_teams" name="count_of_teams" disabled><br>
+      <input type="text" id="best_offense" name="best_offense" disabled><br>
+      <input type="text" id="worst_offense" name="worst_offense" disabled><br>
+      <input type="text" id="best_defense" name="best_defense" disabled><br>
+      <input type="text" id="worst_defense" name="worst_defense" disabled><br>
+      <input type="text" id="highest_scoring_visitor" name="highest_scoring_visitor" disabled><br>
+      <input type="text" id="lowest_scoring_visitor" name="lowest_scoring_visitor" disabled><br>
+      <input type="text" id="highest_scoring_home_team" name="highest_scoring_home_team" disabled><br>
+      <input type="text" id="lowest_scoring_home_team" name="lowest_scoring_home_team" disabled><br>
+      <input type="text" id="winningest_team" name="winningest_team" disabled><br>
+      <input type="text" id="best_fans" name="best_fans" disabled><br>
+      <input type="text" id="worst_fans" name="worst_fans" disabled><br>
+      <input type="text" id="highest_total_score" name="highest_total_score" disabled><br>
+      <input type="text" id="lowest_total_score" name="lowest_total_score" disabled><br>
+      <input type="text" id="biggest_blowout" name="biggest_blowout" disabled><br>
+      <input type="text" id="percentage_home_wins" name="percentage_home_wins" disabled><br>
+      <input type="text" id="percentage_visitor_wins" name="percentage_visitor_wins" disabled><br>
+      <input type="text" id="count_of_games_by_season" name="count_of_games_by_season" disabled><br>
+      <input type="text" id="average_goals_per_game" name="average_goals_per_game" disabled><br>
+      <input type="text" id="average_goals_by_season" name="average_goals_by_season" disabled><br>
+    </section>
+  </section>
+<body>

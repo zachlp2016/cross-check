@@ -19,7 +19,7 @@ class GameTeam
     @game_id = details["game_id"]
     @team_id = details["team_id"]
     @home_or_away = details["HoA"]
-    @won = details["won"]
+    @won = convert_boolean_string(details["won"])
     @settled_in = details["settled_in"]
     @head_coach = details["head_coach"]
     @goals = details["goals"].to_i
@@ -31,5 +31,15 @@ class GameTeam
     @face_off_win_percentage = details["faceOffWinPercentage"].to_f
     @giveaways = details["giveaways"].to_i
     @takeaways = details["takeaways"].to_i
+  end
+
+  def convert_boolean_string(str)
+    if str == "TRUE"
+      true
+    elsif str == "FALSE"
+      false
+    else
+      str
+    end
   end
 end

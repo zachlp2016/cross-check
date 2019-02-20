@@ -27,11 +27,11 @@ class GameTeamTest < Minitest::Test
     assert_instance_of GameTeam, @game_team
   end
 
-  def test_team_attributes_initialize_correctly
+  def test_game_team_attributes_initialize_correctly
     assert_equal "2012030221", @game_team.game_id
     assert_equal "3", @game_team.team_id
     assert_equal "away", @game_team.home_or_away
-    assert_equal "FALSE", @game_team.won
+    assert_equal false, @game_team.won
     assert_equal "OT", @game_team.settled_in
     assert_equal "John Tortorella", @game_team.head_coach
     assert_equal 2, @game_team.goals

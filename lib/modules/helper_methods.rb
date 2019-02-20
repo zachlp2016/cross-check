@@ -24,6 +24,15 @@ module HelperMethods
     end
   end
 
+  def group_by_team_general
+    games = Hash.new {|games,team| games[team] = []}
+    @games.each do |game|
+      games[game.away_team_id] << game
+      games[game.home_team_id] << game
+    end
+    return games
+  end
+
   def team_win_loss_by_season(team_id)
     game_results = get_team_stats_for_each_game(team_id)
     season_results = Hash.new{|hash,key|
@@ -39,17 +48,24 @@ module HelperMethods
   end
 
   def get_outcomes_by_opponent(team_id)
-    games = get_team_stats_for_each_game(team_id)
+    games = get_general_game_stats_by_team(team_id)
     outcomes_against = Hash.new{|hash,opponent|
       hash[opponent] = {win: 0, loss: 0}
     }
-    games.each do |target_game|
-      opponent = @game_teams.find do |game|
-        game.game_id == target_game.game_id &&
-        game.team_id != target_game.team_id
-      end.team_id
-      outcome = target_game.won ? :win : :loss
-      outcomes_against[opponent][outcome] += 1
+    games.each do |game|
+      if game.away_team_id == team_id
+        if game.outcome[0..3] == "away"
+          outcomes_against[game.home_team_id][:win] += 1
+        else
+          outcomes_against[game.home_team_id][:loss] += 1
+        end
+      else
+        if game.outcome[0..3] == "home"
+          outcomes_against[game.away_team_id][:win] += 1
+        else
+          outcomes_against[game.away_team_id][:loss] += 1
+        end
+      end
     end
     return outcomes_against
   end
@@ -86,5 +102,83 @@ module HelperMethods
      game_results[game.head_coach][:total] += 1
     end
     return game_results
+  end
+
+  def group_by_team
+    teams = @game_teams.group_by do |game_team|
+      game_team.team_id
+    end
+  end
+
+  def total_home_games_won
+    @game_teams.reduce(0) do |total,team|
+      total += 1 if team.home_or_away == "home" && team.won == true
+      total = total
+    end
+  end
+
+  def total_away_games_won
+    @game_teams.reduce(0) do |total,team|
+      total += 1 if team.home_or_away == "away" && team.won == true
+      total = total
+    end
+  end
+
+  def total_games
+    total_home_games_won + total_away_games_won.to_f
+  end
+
+  def seasons
+    @games.group_by do |season|
+      season.season
+    end
+  end
+
+  def season_win_accumulation(season)
+    game_results = Hash.new{|results, team|
+      results[team] = Hash.new{|team, season|
+        team[season] = {total: 0, wins: 0}
+      }
+    }
+    @game_teams.each do |game|
+      if game.game_id[0..3] == season[0..3]
+        if game.won == true
+          game_results[game.team_id][game.game_id[4..5]][:wins] += 1
+        end
+        game_results[game.team_id][game.game_id[4..5]][:total] += 1
+      end
+    end
+    return game_results
+  end
+
+  def get_win_counts(games)
+    counts = {"home_games" => 0.0, "home_wins" => 0.0, "away_games" => 0.0, "away_wins" => 0.0}
+    games.each do |game|
+      counts["#{game.home_or_away}_games"] += 1
+      if game.won
+        counts["#{game.home_or_away}_wins"] += 1
+      end
+    end
+    return counts
+  end
+
+  def goals_allowed(games, team_id)
+    games.sum do |game|
+      if game.home_team_id == team_id
+        game.away_goals
+      else
+        game.home_goals
+      end
+    end
+  end
+
+  def goals_scored(games, team_id, location)
+    games.sum do |game|
+      if game.send("#{location}_team_id") == team_id
+        game.send("#{location}_goals")
+      else
+        0
+      end
+    end
   end
 end
