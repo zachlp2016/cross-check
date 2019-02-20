@@ -21,12 +21,12 @@ module GameStatistics
   end
 
   def percentage_home_wins
-    home_percentage =  total_home_games_won/total_games
+    home_percentage =  total_games_won_by_location("home")/total_games
     return home_percentage.round(2)
   end
 
   def percentage_visitor_wins
-    away_percentage =  total_away_games_won/total_games
+    away_percentage =  total_games_won_by_location("away")/total_games
     return away_percentage.round(2)
   end
 

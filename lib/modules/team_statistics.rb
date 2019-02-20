@@ -18,18 +18,18 @@ module TeamStatistics
   end
 
   def average_win_percentage(team_id)
-    games = get_team_stats_for_each_game(team_id)
+    games = group_by_team[team_id]
     wins = games.count{|game| game.won}
     (wins.to_f / games.count).round(2)
   end
 
   def most_goals_scored(team_id)
-    games = get_team_stats_for_each_game(team_id)
+    games = group_by_team[team_id]
     games.max_by{|game| game.goals}.goals
   end
 
   def fewest_goals_scored(team_id)
-    games = get_team_stats_for_each_game(team_id)
+    games = group_by_team[team_id]
     games.min_by{|game| game.goals}.goals
   end
 

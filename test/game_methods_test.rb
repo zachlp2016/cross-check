@@ -29,8 +29,8 @@ class GameMethodsTest < Minitest::Test
   end
 
   def test_home_and_away_games_won
-    assert_equal 299 , @stat_tracker.total_home_games_won
-    assert_equal  231, @stat_tracker.total_away_games_won
+    assert_equal 299 , @stat_tracker.total_games_won_by_location("home")
+    assert_equal  231, @stat_tracker.total_games_won_by_location("away")
   end
 
   def test_total_games_played
