@@ -17,13 +17,6 @@ module HelperMethods
     @game_teams.select {|game| game.team_id == team_id}
   end
 
-  def get_general_game_stats_by_team(team_id)
-    @games.select do |game|
-      game.home_team_id == team_id ||
-      game.away_team_id == team_id
-    end
-  end
-
   def group_by_team_general
     games = Hash.new {|games,team| games[team] = []}
     @games.each do |game|
@@ -48,7 +41,7 @@ module HelperMethods
   end
 
   def get_outcomes_by_opponent(team_id)
-    games = get_general_game_stats_by_team(team_id)
+    games = group_by_team_general[team_id]
     outcomes_against = Hash.new{|hash,opponent|
       hash[opponent] = {win: 0, loss: 0}
     }

@@ -94,7 +94,7 @@ module TeamStatistics
         season[type] = {total: 0.0, wins: 0.0}
       }
     }
-    get_general_game_stats_by_team(team_id).each do |game|
+    group_by_team_general[team_id].each do |game|
       type = game.type == "P" ? :preseason : :regular_season #note: "P" represents playoffs, not preseason. This passes spec.
       location = game.home_team_id == team_id ? ["home", "away"] : ["away", "home"]
       summary[game.season][type][:total_goals_scored] += game.send("#{location[0]}_goals")
