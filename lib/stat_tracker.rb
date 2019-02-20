@@ -4,16 +4,19 @@ require_relative './data_structures/team'
 require_relative './data_structures/game_team'
 require_relative './modules/true_false_converter'
 require_relative './modules/team_statistics'
+require_relative './modules/league_helper_methods'
 require_relative './modules/league_statistics'
 require_relative './modules/game_methods'
 require_relative './modules/season_statistics'
 require_relative './modules/helper_methods'
 require_relative './modules/site_methods'
 
+
 class StatTracker
   include TrueFalseConverter
   include HelperMethods
   include TeamStatistics
+  include LeagueHelperMethods
   include LeagueStatistics
   include GameMethods
   include SeasonStatistics

@@ -8,8 +8,8 @@ class LeagueStatisticsTest < Minitest::Test
       @game_path = './test/data/game_test.csv'
       @team_path = './data/team_info.csv'
       @game_team_path = './test/data/game_teams_stats.csv'
-
       @game_team_test_path = './test/data/game_teams_league_stats_test.csv'
+      @game_team_mini_path = './test/data/game_teams_league_mini_stats_test.csv'
       @game_test_path = './test/data/game_league_stats_test.csv'
 
       @locations = {
@@ -24,7 +24,14 @@ class LeagueStatisticsTest < Minitest::Test
         game_teams: @game_team_test_path
       }
 
+      @test_mini_data = {
+        games: @game_test_path,
+        teams: @team_path,
+        game_teams: @game_team_mini_path
+      }
+
       @test_stat_tracker = StatTracker.from_csv(@test_data)
+      @test_mini_stat_tracker = StatTracker.from_csv(@test_mini_data)
   end
 
   def test_method_count_of_teams
