@@ -17,6 +17,8 @@ module SeasonStatistics
         stats["03"][:wins].to_f / stats["03"][:total] -
         stats["02"][:wins].to_f / stats["02"][:total]
       else
+        # we never encounter this in our test data,
+        # but it's necessary for the full dataset
         0.0
       end
     end
@@ -29,6 +31,8 @@ module SeasonStatistics
         stats["02"][:wins].to_f / stats["02"][:total] -
         stats["03"][:wins].to_f / stats["03"][:total]
       else
+        # we never encounter this in our test data,
+        # but it's necessary for the full dataset
         0.0
       end
     end

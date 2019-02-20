@@ -36,10 +36,8 @@ class GameTeam
   def convert_boolean_string(str)
     if str == "TRUE"
       true
-    elsif str == "FALSE"
-      false
     else
-      str
+      false
     end
   end
 end
