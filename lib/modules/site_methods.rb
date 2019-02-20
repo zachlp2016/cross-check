@@ -1,29 +1,19 @@
 require 'json'
 module SiteMethods
   def get_team_list
-    if @team_list
-      return @team_list
-    else
-      team_list = {}
-      @teams.each do |team|
-        team_list[team.team_id] = team.team_name
-      end
-      @team_list = team_list.to_json
+    team_list = {}
+    @teams.each do |team|
+      team_list[team.team_id] = team.team_name
     end
-    return @team_list
+    return team_list.to_json
   end
 
   def get_season_list
-    if @season_list
-      return @season_list
-    else
-      season_list = {}
-      @games.each do |game|
-        season_list[game.season] = "#{game.season[0..3]} - #{game.season[4..7]}"
-      end
-      @season_list = season_list.to_json
+    season_list = {}
+    @games.each do |game|
+      season_list[game.season] = "#{game.season[0..3]} - #{game.season[4..7]}"
     end
-    return @season_list
+    return season_list.to_json
   end
 
   def get_team_details(team_id)

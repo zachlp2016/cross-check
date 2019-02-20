@@ -21,7 +21,8 @@ stat_tracker = StatTracker.from_csv(locations)
 stat_tracker.get_general_stats
 
 get '/' do
-  File.read(File.join('site', 'index.html'))
+  # File.read(File.join('site', 'index.html'))
+  redirect to('/index.html')
 end
 
 get '/data/:method' do |method|

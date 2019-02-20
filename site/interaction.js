@@ -83,7 +83,33 @@ function insertResponse(error, data){
   } else {
     for (var i in data){
       elm = document.getElementById(i)
-      elm.value = data[i]
+      if (typeof(data[i]) == "object"){
+        if (Array.isArray(data[i])){
+          if (data[i].length == 0){
+            elm.value = "None!"
+          } else {
+            elm.value = data[i].join(", ")
+          }
+        } else {
+          str = pretty_print(data[i], 0)
+          elm.innerHTML = str.trim()
+        }
+      } else {
+        elm.value = data[i]
+      }
     }
   }
+}
+
+function pretty_print(data, level){
+  str = ""
+  for (var i in data){
+    str += " ".repeat(level*2) + i + " => "
+    if (typeof(data[i]) == "object"){
+      str += "{\n" + pretty_print(data[i], level + 1) + " ".repeat(level*2) + "}\n"
+    } else {
+      str += data[i] + "\n"
+    }
+  }
+  return str
 }

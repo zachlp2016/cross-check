@@ -29,9 +29,19 @@ section.sidebar label {
   display: block;
   height: 20px;
 }
-section.results input, section.results select {
+section.results input, section.results select, section.results textarea {
   height: 20px;
+  width: 190px;
   box-sizing: border-box;
+  display: block;
+}
+
+section.results input, section.results textarea {
+  -webkit-appearance: textfield;
+}
+
+textarea#seasonal_summary {
+  height: 215px;
 }
 
 section.shown {display: block}
