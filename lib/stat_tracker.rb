@@ -8,6 +8,7 @@ require_relative './modules/league_statistics'
 require_relative './modules/game_methods'
 require_relative './modules/season_statistics'
 require_relative './modules/helper_methods'
+require_relative './modules/site_methods'
 
 class StatTracker
   include TrueFalseConverter
@@ -16,6 +17,7 @@ class StatTracker
   include LeagueStatistics
   include GameMethods
   include SeasonStatistics
+  include SiteMethods
 
   attr_reader :games,
               :teams,

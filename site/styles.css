@@ -1,0 +1,47 @@
+nav {
+  margin-bottom: 20px;
+}
+nav>ul {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+nav>ul>li {
+  display: inline-block;
+  width: 75px;
+  text-align: center;
+  margin-left: 5px;
+  padding: 2px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+}
+
+body>section {display: none}
+
+section.sidebar {
+  float: left;
+  text-align: right;
+  padding-right: 8px;
+}
+
+section.sidebar label {
+  display: block;
+  height: 20px;
+}
+section.results input, section.results select, section.results textarea {
+  height: 20px;
+  width: 190px;
+  box-sizing: border-box;
+  display: block;
+}
+
+section.results input, section.results textarea {
+  -webkit-appearance: textfield;
+}
+
+textarea#seasonal_summary {
+  height: 215px;
+}
+
+section.shown {display: block}
